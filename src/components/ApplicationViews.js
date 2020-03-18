@@ -13,14 +13,15 @@ export default function ApplicationViews() {
             <Route path="/feed/favorites" render={props => <p>FAVORITES</p>} />
 
             {/* SUMMARY ROUTES */}
-            <Route path="/tldr" render={props => <p>USER TLDR SUMMARY LIST</p>} />
+            <Route exact path="/tldr" render={props => <p>USER TLDR SUMMARY LIST</p>} />
             <Route path="/tldr/favorites" render={props => <p>TLDR FAVORITE LIST</p>} />
+            <Route path="/tldr/followed" render={props => <p>TLDR FOLLOWED USERS</p>} />
 
 			{/* <Route path="/login" component={Login} /> */}
             <Route path="/login" render={props => <p>LOGIN</p>} />
             {/* <Route path="/register" component={Register} /> */}
             <Route path='/register' render={props => <p>REGISTER</p>} />
-            
+
         </React.Fragment>
     )
 }
