@@ -15,9 +15,9 @@ const login = credentials => {
     })
     .then(res => res.json())
     .then(res => {
-        console.log('login', res)
         if ('valid' in res && res.valid && 'token' in res){
             sessionStorage.setItem(Settings.token, res.token)
+            return true
         }
     })
 }
@@ -36,6 +36,7 @@ const register = userInfo => {
         console.log('register', res)
         if ('token' in res) {
             sessionStorage.setItem(Settings.token, res.token)
+            return true
         }
     })
 }

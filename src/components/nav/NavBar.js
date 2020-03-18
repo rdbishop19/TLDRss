@@ -4,7 +4,10 @@ import { NavLink } from 'react-router-dom'
 export default function NavBar() {
     return (
         <React.Fragment>
-            <NavLink to="/register" >Register</NavLink>
+            <ul>
+                <li><NavLink to="/login"> Login </NavLink></li>
+                <li><NavLink to="/register"> Register </NavLink></li>
+            </ul>
         </React.Fragment>
     )
 }

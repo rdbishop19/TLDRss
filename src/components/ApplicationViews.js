@@ -7,6 +7,7 @@ import Login from './auth/Login'
 export default function ApplicationViews() {
     return (
         <React.Fragment>
+            {/* HOME VIEW */}
             <Route exact path="/" component={Home} />
 
             {/* FEED ROUTES */}
@@ -20,9 +21,7 @@ export default function ApplicationViews() {
             <Route path="/tldr/favorites" render={props => <p>TLDR FAVORITE LIST</p>} />
             <Route path="/tldr/followed" render={props => <p>TLDR FOLLOWED USERS</p>} />
 
-			{/* <Route path="/login" component={Login} /> */}
             <Route path="/login" component={Login} />
-            {/* <Route path="/register" component={Register} /> */}
             <Route path='/register' component={Register} />
 
         </React.Fragment>
