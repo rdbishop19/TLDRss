@@ -1,13 +1,27 @@
 import React from 'react'
-import { NavLink } from 'react-router-dom'
+import { NavLink, useHistory } from 'react-router-dom'
+import { logout, isAuthenticated } from '../auth/simpleAuth'
+import './Nav.css'
 
 export default function NavBar() {
+
+    const history = useHistory()
+    const handleLogout = () => {
+        if (window.confirm("Are you sure you want to logout?")){
+            logout()
+            history.push('/')
+        }
+    }
+
     return (
-        <React.Fragment>
-            <ul>
-                <li><NavLink to="/login"> Login </NavLink></li>
-                <li><NavLink to="/register"> Register </NavLink></li>
+        <div className="nav-container">
+            <ul className="nav-list">
+                {isAuthenticated() ? <li className="nav-list-item"><NavLink to='' onClick={handleLogout}>Logout</NavLink></li> :
+                <>
+                    <li className="nav-list-item"><NavLink activeClassName="active-link" to='/register'>Register</NavLink></li>
+                    <li className="nav-list-item"><NavLink activeClassName="active-link" to='/login'>Login</NavLink></li>
+                </>}
             </ul>
-        </React.Fragment>
+        </div>
     )
 }

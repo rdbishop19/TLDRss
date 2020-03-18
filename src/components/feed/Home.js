@@ -7,15 +7,17 @@ export default function Home() {
     })
 
     const getFeed = () => {
-        ApiManager.getAll("article").then(setFeed)
+        ApiManager.getAll("articles").then(setFeed)
     }
 
     useEffect(getFeed, [])
     
     return (
         <React.Fragment>
-            <div>HOME</div>
-            {feed.results.map(entry => <p>thing</p>)}
+            <h2>feed</h2>
+            {feed.results.map((entry, index) => {
+                return <div key={index}>{entry.title}</div>
+            })}
         </React.Fragment>
     )
 }
