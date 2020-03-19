@@ -22,8 +22,11 @@
 
 .nav-list-item {
 	text-decoration: none;
+	text-align: center;
 	float: left;
 	margin: 4pt;
+	border-right: 1px solid grey;
+	padding-right: 5px;
 }
 
 .float-right {

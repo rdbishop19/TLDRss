@@ -28,11 +28,15 @@
 	padding-top: 7px;
 	width: 0;
 	height: 0;
-	border-left: 5px solid transparent;
-	border-right: 5px solid transparent;
-	border-bottom: 5px solid black;
+	border-left: 4px solid transparent;
+	border-right: 4px solid transparent;
+	border-bottom: 6px solid black;
 }
 
-.arrow-up:hover {
-    cursor: pointer;
+.upvote-link {
+    padding-right: 5px;
+}
+
+.upvote-link:hover {
+    cursor:pointer
 }

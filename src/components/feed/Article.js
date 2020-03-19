@@ -8,8 +8,8 @@ export default function Article({ article, number }) {
 			<td className="number">
 				<span >{number}.</span>
 			</td>
-            <td valign="top">
-                <div className="arrow-up" title="upvote"></div>
+            <td valign="top" title="upvote" className="upvote-link">
+                <div className="arrow-up"></div>
             </td>
 			<td>
 			    <a className="article-link" href={article.link} title={article.link}>
