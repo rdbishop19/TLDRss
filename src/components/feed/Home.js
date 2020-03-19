@@ -7,8 +7,8 @@ import SummaryContainer from './SummaryContainer';
 
 export default function Home() {
 	const [ feed, setFeed ] = useState({
-		previous: '',
-		next: '',
+		previous: null,
+		next: null,
 		results: []
 	});
     const [ loading, setLoading ] = useState(false);
@@ -39,12 +39,12 @@ export default function Home() {
 	return (
 		<React.Fragment>
 			<div className="button-container">
-				<button disabled={loading} onClick={() => getNewPage(feed.previous)}>
+				{feed.previous && <button disabled={loading} onClick={() => getNewPage(feed.previous)}>
 					Prev
-				</button>
-				<button disabled={loading} onClick={() => getNewPage(feed.next)}>
+				</button>}
+				{feed.next && <button disabled={loading} onClick={() => getNewPage(feed.next)}>
 					Next
-				</button>
+				</button>}
 			</div>
 			<span>{feed.count && `(${feed.count} articles)`}</span>
 			<div className="full">
@@ -56,12 +56,12 @@ export default function Home() {
 				</div>
 			</div>
 			<div className="button-container">
-				<button disabled={loading} onClick={() => getNewPage(feed.previous)}>
+                {feed.previous && <button disabled={loading} onClick={() => getNewPage(feed.previous)}>
 					Prev
-				</button>
-				<button disabled={loading} onClick={() => getNewPage(feed.next)}>
+				</button>}
+				{feed.next && <button disabled={loading} onClick={() => getNewPage(feed.next)}>
 					Next
-				</button>
+				</button>}
 			</div>
 		</React.Fragment>
 	);
