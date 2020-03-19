@@ -1,0 +1,11 @@
+.user-summary {
+    border: 2px solid grey;
+    padding: 5px;
+    font-size: small;
+}
+
+.username {
+    padding-right: 5px;
+    font-size: large;
+    font-weight: bolder;
+}

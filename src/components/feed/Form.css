@@ -1,0 +1,14 @@
+.text-area {
+    width: 95%;
+    height: 200px;
+}
+
+.form-label {
+    font-size: smaller;
+}
+
+.form-label a {
+    color: black;
+    text-decoration: dotted;
+    text-decoration-line: underline;
+}

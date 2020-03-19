@@ -11,12 +11,12 @@ export default function Home() {
 		next: null,
 		results: []
 	});
-    const [ loading, setLoading ] = useState(false);
-    const [ summaries, setSummaries ] = useState({
-        results: []
-    })
-    // const [ selectedArticle, setSelectedArticle ] = useState(null)
-    const [ userSummary, setUserSummary ] = useState(null)
+	const [ loading, setLoading ] = useState(false);
+	const [ summaries, setSummaries ] = useState({
+		results: []
+	});
+	const [ selectedArticle, setSelectedArticle ] = useState(null);
+	const [ userSummary, setUserSummary ] = useState(null);
 
 	const updateLoading = () => setLoading((prevState) => !prevState);
 	const getFeed = () => {
@@ -29,41 +29,57 @@ export default function Home() {
 			updateLoading();
 			ApiManager.getPage(url).then(setFeed).then(updateLoading);
 		}
-    };
-    
-    const getSummaries = (articleId) => {
-        ApiManager.getAll('summaries?user=true').then(setUserSummary)
-        ApiManager.getAll('summaries').then(setSummaries)
-    }
+	};
+
+	const getSummaries = (articleId) => {
+		if(selectedArticle){
+			if (window.confirm("Clear current submission?")){
+				setSelectedArticle(articleId);
+			} else return
+		}
+		setSelectedArticle(articleId)
+		ApiManager.getAll(`summaries?article=${articleId}&user=true`).then((res) => setUserSummary(res.results[0]));
+		ApiManager.getAll(`summaries?article=${articleId}`).then(setSummaries);
+	};
 
 	useEffect(getFeed, []);
 
 	return (
 		<React.Fragment>
 			<div className="button-container">
-				{feed.previous && <button disabled={loading} onClick={() => getNewPage(feed.previous)}>
-					Prev
-				</button>}
-				{feed.next && <button disabled={loading} onClick={() => getNewPage(feed.next)}>
-					Next
-				</button>}
+				{feed.previous && (
+					<button disabled={loading} onClick={() => getNewPage(feed.previous)}>
+						Prev
+					</button>
+				)}
+				{feed.next && (
+					<button disabled={loading} onClick={() => getNewPage(feed.next)}>
+						Next
+					</button>
+				)}
 			</div>
 			<span>{feed.count && `(${feed.count} articles)`}</span>
 			<div className="full">
 				<div className="left">
-					<FeedContainer feed={feed} methods={{getSummaries}} />
+					<FeedContainer feed={feed} methods={{ getSummaries }} />
 				</div>
 				<div className="right">
-					<SummaryContainer summaries={summaries} userSummary={userSummary}/>
+					{selectedArticle && (
+						<SummaryContainer summaries={summaries} userSummary={userSummary} selected={selectedArticle} />
+					)}
 				</div>
 			</div>
 			<div className="button-container">
-                {feed.previous && <button disabled={loading} onClick={() => getNewPage(feed.previous)}>
-					Prev
-				</button>}
-				{feed.next && <button disabled={loading} onClick={() => getNewPage(feed.next)}>
-					Next
-				</button>}
+				{feed.previous && (
+					<button disabled={loading} onClick={() => getNewPage(feed.previous)}>
+						Prev
+					</button>
+				)}
+				{feed.next && (
+					<button disabled={loading} onClick={() => getNewPage(feed.next)}>
+						Next
+					</button>
+				)}
 			</div>
 		</React.Fragment>
 	);

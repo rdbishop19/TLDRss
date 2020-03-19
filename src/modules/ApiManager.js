@@ -5,7 +5,7 @@ const getHeaders = () => {
     if (isAuthenticated()){
         return {
             'Content-Type': 'application/json',
-            'Authorization': `Token ${sessionStorage.getItem(Settings.token_name)}`, 
+            'Authorization': `Token ${sessionStorage.getItem(Settings.token_key)}`, 
         }
     } else {
         return {
@@ -31,6 +31,7 @@ export default {
             'method': 'GET',
             'headers': getHeaders()
         };
+        // console.log('settings', settings)
         const e = await fetch(`${Settings.remoteURL}/${endpoint}`, settings)
         return await e.json()
     },
@@ -41,6 +42,16 @@ export default {
             'headers': getHeaders()
         };
         const e = await fetch(pageUrlRef, settings)
+        return await e.json()
+    },
+
+    async post(endpoint, newItem){
+        const settings = {
+            'method': 'POST',
+            'headers': getHeaders(),
+            'body': JSON.stringify(newItem)
+        };
+        const e = await fetch(`${Settings.remoteURL}/${endpoint}`, settings)
         return await e.json()
     }
 };
