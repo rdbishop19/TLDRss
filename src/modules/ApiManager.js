@@ -34,4 +34,13 @@ export default {
         const e = await fetch(`${Settings.remoteURL}/${endpoint}`, settings)
         return await e.json()
     },
+
+    async getPage(pageUrlRef) {
+        const settings = {
+            'method': 'GET',
+            'headers': getHeaders()
+        };
+        const e = await fetch(pageUrlRef, settings)
+        return await e.json()
+    }
 };

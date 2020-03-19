@@ -1,0 +1,100 @@
+/* .article {
+    pointer-events: none;
+} */
+
+.article:hover {
+    background: yellow;
+}
+
+.article-link {
+	color: black;
+}
+
+.article-link:hover {
+	text-decoration: underline;
+	cursor: pointer;
+}
+
+.timestamp {
+	margin: 0px;
+	color: grey;
+	font-size: smaller;
+}
+
+.external-link {
+	margin-left: 5px;
+}
+.feedname {
+	color: grey;
+}
+
+.feedname:hover {
+	color: rgb(177, 32, 32);
+	text-decoration: underline;
+}
+
+.number {
+	padding-right: 3px;
+	text-align: right;
+	color: grey;
+	vertical-align: top;
+}
+
+.arrow-up {
+	padding-top: 7px;
+	width: 0;
+	height: 0;
+	border-left: 4px solid transparent;
+	border-right: 4px solid transparent;
+	border-bottom: 6px solid black;
+}
+
+.arrow-right {
+	width: 0;
+	height: 0;
+	border-top: 6px solid transparent;
+	border-bottom: 6px solid transparent;
+
+	border-left: 6px solid orangered;
+}
+
+.show-me {
+    visibility: hidden;
+}
+
+.upvote-link {
+	padding-right: 5px;
+}
+
+.upvote-link:hover {
+    cursor: pointer;
+    transform: translate(0px, -3px);
+}
+
+.upvote-link:hover .arrow-up {
+    padding-top: 7px;
+	width: 0;
+	height: 0;
+	border-left: 4px solid transparent;
+	border-right: 4px solid transparent;
+	border-bottom: 6px solid green;
+}
+
+.tldr-link {
+    display: flex;
+    /* margin: 0 auto; */
+    margin-top: 10px;
+    width: 50px;
+    height: 20px;
+    justify-content: center;
+    pointer-events: auto;
+}
+
+.tldr-link:hover {
+    cursor: pointer;
+    transform: translate(3px, 0px);
+}
+
+.tldr-link:hover .show-me {
+    visibility: visible;
+}
