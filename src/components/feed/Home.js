@@ -15,6 +15,8 @@ export default function Home() {
     const [ summaries, setSummaries ] = useState({
         results: []
     })
+    // const [ selectedArticle, setSelectedArticle ] = useState(null)
+    const [ userSummary, setUserSummary ] = useState(null)
 
 	const updateLoading = () => setLoading((prevState) => !prevState);
 	const getFeed = () => {
@@ -29,8 +31,8 @@ export default function Home() {
 		}
     };
     
-    const getSummaries = () => {
-        console.log('boom')
+    const getSummaries = (articleId) => {
+        ApiManager.getAll('summaries?user=true').then(setUserSummary)
         ApiManager.getAll('summaries').then(setSummaries)
     }
 
@@ -52,7 +54,7 @@ export default function Home() {
 					<FeedContainer feed={feed} methods={{getSummaries}} />
 				</div>
 				<div className="right">
-					<SummaryContainer summaries={summaries}/>
+					<SummaryContainer summaries={summaries} userSummary={userSummary}/>
 				</div>
 			</div>
 			<div className="button-container">
