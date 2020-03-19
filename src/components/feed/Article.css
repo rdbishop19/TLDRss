@@ -1,18 +1,38 @@
 .article-link {
-    color: black;
+	color: black;
 }
 
 .article-link:hover {
-    text-decoration: underline;
+	text-decoration: underline;
 }
 
 .timestamp {
-    margin: 0px;
-    color: grey;
-    font-size: smaller;
+	margin: 0px;
+	color: grey;
+	font-size: smaller;
 }
 
 .feedname {
-    margin-left: 5px;
-    color: grey;
+	margin-left: 5px;
+	color: grey;
+}
+
+.number {
+	padding-right: 3px;
+	text-align: right;
+	color: grey;
+	vertical-align: top;
+}
+
+.arrow-up {
+	padding-top: 7px;
+	width: 0;
+	height: 0;
+	border-left: 5px solid transparent;
+	border-right: 5px solid transparent;
+	border-bottom: 5px solid black;
+}
+
+.arrow-up:hover {
+    cursor: pointer;
 }

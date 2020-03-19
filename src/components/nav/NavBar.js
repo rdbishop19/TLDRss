@@ -14,14 +14,18 @@ export default function NavBar() {
     }
 
     return (
-        <div className="nav-container">
-            <ul className="nav-list">
-                {isAuthenticated() ? <li className="nav-list-item"><NavLink to='' onClick={handleLogout}>Logout</NavLink></li> :
-                <>
-                    <li className="nav-list-item"><NavLink activeClassName="active-link" to='/register'>Register</NavLink></li>
-                    <li className="nav-list-item"><NavLink activeClassName="active-link" to='/login'>Login</NavLink></li>
-                </>}
-            </ul>
-        </div>
+       <React.Fragment>
+            <div className="nav-container">
+                <ul className="nav-list">
+                    <li className="nav-list-item"><NavLink activeClassName="active-link" to='/'>Home</NavLink></li>
+                    {isAuthenticated() ? <li className="nav-list-item float-right"><NavLink to='' onClick={handleLogout}>Logout</NavLink></li> :
+                        <>
+                            <li className="nav-list-item float-right"><NavLink activeClassName="active-link" to='/register'>Register</NavLink></li>
+                            <li className="nav-list-item float-right"><NavLink activeClassName="active-link" to='/login'>Login</NavLink></li>
+                        </>
+                    }
+                </ul>
+            </div>
+       </React.Fragment>
     )
 }

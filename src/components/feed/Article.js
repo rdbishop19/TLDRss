@@ -1,19 +1,23 @@
-import React from 'react'
-import './Article.css'
-import moment from 'moment'
+import React from 'react';
+import './Article.css';
+import moment from 'moment';
 
-const style = {
-    color: 'black',
-    margin: '5px',
-    // textDecoration: 'underline'
-}
-
-export default function Article({ article }) {
-    return (
-        <div style={style}>
-            <a className="article-link" href={article.link}>{article.title}</a>
-            <span className="feedname">({article.feed.name})</span>
-            <p className="timestamp">{article.pub_date && moment(article.pub_date).fromNow()}</p>
-        </div>
-    )
+export default function Article({ article, number }) {
+	return (
+		<tr>
+			<td className="number">
+				<span >{number}.</span>
+			</td>
+            <td valign="top">
+                <div className="arrow-up" title="upvote"></div>
+            </td>
+			<td>
+			    <a className="article-link" href={article.link} title={article.link}>
+    				{article.title}
+    			</a>
+    			<span className="feedname">({article.feed.name})</span>
+    			<p className="timestamp">{article.pub_date && moment(article.pub_date).fromNow()}</p>
+			</td>
+		</tr>
+	);
 }
