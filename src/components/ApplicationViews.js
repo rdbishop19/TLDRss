@@ -1,10 +1,14 @@
 import React from 'react'
 import { Route } from 'react-router-dom'
+import Home from './feed/Home'
+import Register from './auth/Register'
+import Login from './auth/Login'
 
 export default function ApplicationViews() {
     return (
         <React.Fragment>
-            <Route exact path="/" render={props => <p>HOME</p>} />
+            {/* HOME VIEW */}
+            <Route exact path="/" component={Home} />
 
             {/* FEED ROUTES */}
             <Route path="/feed/:feedId(\d+)" render={props => <p>SINGLE FEED</p>} />
@@ -17,10 +21,8 @@ export default function ApplicationViews() {
             <Route path="/tldr/favorites" render={props => <p>TLDR FAVORITE LIST</p>} />
             <Route path="/tldr/followed" render={props => <p>TLDR FOLLOWED USERS</p>} />
 
-			{/* <Route path="/login" component={Login} /> */}
-            <Route path="/login" render={props => <p>LOGIN</p>} />
-            {/* <Route path="/register" component={Register} /> */}
-            <Route path='/register' render={props => <p>REGISTER</p>} />
+            <Route path="/login" component={Login} />
+            <Route path='/register' component={Register} />
 
         </React.Fragment>
     )
