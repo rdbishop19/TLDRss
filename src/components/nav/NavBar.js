@@ -17,6 +17,7 @@ export default function NavBar() {
        <React.Fragment>
             <div className="nav-container">
                 <ul className="nav-list">
+                    <li className="nav-list-item logo"><span>tl;d<span className="logo-rss">rss</span></span></li>
                     <li className="nav-list-item"><NavLink activeClassName="active-link" to='/' exact>home</NavLink></li>
                     <li className="nav-list-item"><NavLink activeClassName="active-link" to='/feed/custom'>my feed</NavLink></li>
                     <li className="nav-list-item"><NavLink activeClassName="active-link" to='/feed/saved'>saved</NavLink></li>

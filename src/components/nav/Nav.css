@@ -27,6 +27,15 @@
 	margin: 4pt;
 	border-right: 1px solid grey;
 	padding-right: 5px;
+	color: white;
+}
+
+.logo {
+	font-weight: bolder;
+}
+
+.logo-rss {
+	text-decoration: underline;
 }
 
 .float-right {
