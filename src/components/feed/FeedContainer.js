@@ -1,7 +1,7 @@
 import React from 'react';
 import Article from './Article';
 
-export default function FeedContainer({ feed }) {
+export default function FeedContainer({ feed, methods }) {
 	return (
 		<table>
 			<tbody>
@@ -11,6 +11,7 @@ export default function FeedContainer({ feed }) {
 							key={index}
 							article={article}
 							number={Number(feed.next.split('=')[2]) - feed.results.length + index + 1}
+							methods={methods}
 						/>
 					);
 				})}

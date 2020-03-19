@@ -1,8 +1,22 @@
 .button-container button {
-    border-radius: 3px;
-    font-family: 'Courier New', Courier, monospace;
+	border-radius: 3px;
+	font-family: 'Courier New', Courier, monospace;
 }
 
 h2 {
-    font-family: 'Courier New', Courier, monospace;
+	font-family: 'Courier New', Courier, monospace;
+}
+
+.full {
+	display: table;
+	width: 100%;
+}
+.left {
+	display: table-cell;
+	width: 70%;
+	padding-right: 15px;
+}
+.right {
+	display: table-cell;
+	width: 30%;
 }
