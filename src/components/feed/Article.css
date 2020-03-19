@@ -1,0 +1,7 @@
+.article-link {
+    color: black;
+}
+
+.article-link:hover {
+    text-decoration: underline;
+}
