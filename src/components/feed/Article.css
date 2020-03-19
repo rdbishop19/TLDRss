@@ -5,3 +5,14 @@
 .article-link:hover {
     text-decoration: underline;
 }
+
+.timestamp {
+    margin: 0px;
+    color: grey;
+    font-size: smaller;
+}
+
+.feedname {
+    margin-left: 5px;
+    color: grey;
+}

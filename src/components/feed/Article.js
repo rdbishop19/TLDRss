@@ -1,5 +1,6 @@
 import React from 'react'
 import './Article.css'
+import moment from 'moment'
 
 const style = {
     color: 'black',
@@ -11,7 +12,8 @@ export default function Article({ article }) {
     return (
         <div style={style}>
             <a className="article-link" href={article.link}>{article.title}</a>
-            <span>({article.feed.name})</span>
+            <span className="feedname">({article.feed.name})</span>
+            <p className="timestamp">{article.pub_date && moment(article.pub_date).fromNow()}</p>
         </div>
     )
 }
