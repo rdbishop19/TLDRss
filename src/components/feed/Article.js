@@ -16,7 +16,7 @@ export default function Article({ article, number, methods }) {
     				{article.title}
     			</a>
     			<span className="external-link">(<a rel="noopener noreferrer" href={article.link} target="_blank" className="feedname" title={article.link}>{article.feed.name}</a>)</span>
-    			<p className="timestamp">{article.pub_date && moment(article.pub_date).fromNow()}</p>
+    			<p className="timestamp">{article.pub_date ? moment(article.pub_date).fromNow() : 'some time ago'}</p>
 			</td>
             <td title="view tl;drs" onClick={methods.getSummaries} className="tldr-link">
                 <div className="arrow-right show-me"></div>
