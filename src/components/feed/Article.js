@@ -4,7 +4,7 @@ import moment from 'moment';
 
 export default function Article({ article, number, methods }) {
 	return (
-		<tr>
+		<tr className="article">
 			<td className="number">
 				<span >{number}.</span>
 			</td>
@@ -19,6 +19,7 @@ export default function Article({ article, number, methods }) {
     			<p className="timestamp">{article.pub_date && moment(article.pub_date).fromNow()}</p>
 			</td>
             <td valign="top" title="view tl;drs" onClick={methods.getSummaries} className="tldr-link">
+                <div className="arrow-right show-me"></div>
                 <div className="arrow-right"></div>
             </td>
 		</tr>

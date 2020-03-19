@@ -14,9 +14,9 @@ h2 {
 .left {
 	display: table-cell;
 	width: 70%;
-	padding-right: 15px;
 }
 .right {
 	display: table-cell;
 	width: 30%;
+	padding-left: 30px;
 }

@@ -3,7 +3,7 @@ import Article from './Article';
 
 export default function FeedContainer({ feed, methods }) {
 	return (
-		<table>
+		<table cellSpacing="0" cellPadding="0">
 			<tbody>
 				{feed.results.map((article, index) => {
 					return (

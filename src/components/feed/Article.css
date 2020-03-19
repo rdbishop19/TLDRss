@@ -1,3 +1,11 @@
+/* .article {
+    pointer-events: none;
+} */
+
+.article:hover {
+    background: yellow;
+}
+
 .article-link {
 	color: black;
 }
@@ -50,6 +58,10 @@
 	border-left: 6px solid orangered;
 }
 
+.show-me {
+    visibility: hidden;
+}
+
 .upvote-link {
 	padding-right: 5px;
 }
@@ -59,7 +71,29 @@
     transform: translate(0px, -3px);
 }
 
+.upvote-link:hover .arrow-up {
+    padding-top: 7px;
+	width: 0;
+	height: 0;
+	border-left: 4px solid transparent;
+	border-right: 4px solid transparent;
+	border-bottom: 6px solid green;
+}
+
+.tldr-link {
+    display: flex;
+    margin: 0 auto;
+    width: 50px;
+    height: 20px;
+    justify-content: center;
+    pointer-events: auto;
+}
+
 .tldr-link:hover {
     cursor: pointer;
     transform: translate(3px, 0px);
+}
+
+.tldr-link:hover .show-me {
+    visibility: visible;
 }
