@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useHistory, useLocation } from 'react-router-dom';
+import { useHistory, useLocation, Link } from 'react-router-dom';
 import { login } from './simpleAuth';
 
 export default function Login() {
@@ -65,6 +65,9 @@ export default function Login() {
 					<button type="submit">Login</button>
 				</fieldset>
 			</form>
+			<br/>
+			<p>First time here? Join us!</p>
+			<button><Link style={{ color: 'black' }} to={{pathname:'/register', state: {articleId: articleId}}}>Register</Link></button>
 		</main>
 	);
 }
