@@ -1,7 +1,7 @@
 import Settings from "../../repositories/Settings"
 
 const isAuthenticated = () => {
-    return sessionStorage.getItem(Settings.token) !== null
+    return sessionStorage.getItem(Settings.token_key) !== null
 }
 
 const login = credentials => {
@@ -16,7 +16,7 @@ const login = credentials => {
     .then(res => res.json())
     .then(res => {
         if ('valid' in res && res.valid && 'token' in res){
-            sessionStorage.setItem(Settings.token, res.token)
+            sessionStorage.setItem(Settings.token_key, res.token)
             return true
         }
     })
@@ -35,14 +35,14 @@ const register = userInfo => {
     .then(res => {
         console.log('register', res)
         if ('token' in res) {
-            sessionStorage.setItem(Settings.token, res.token)
+            sessionStorage.setItem(Settings.token_key, res.token)
             return true
         }
     })
 }
 
 const logout = () => {
-    sessionStorage.removeItem(Settings.token)
+    sessionStorage.removeItem(Settings.token_key)
 }
 
 export { isAuthenticated, login, logout, register }

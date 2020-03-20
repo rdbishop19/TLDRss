@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
-import { useHistory } from 'react-router-dom';
+import { useHistory, useLocation, Link } from 'react-router-dom';
 import { register } from './simpleAuth';
 
 export default function Register() {
 	const [ user, setUser ] = useState();
 	const history = useHistory();
+	const location = useLocation()
+	const articleId = location.state ? location.state.articleId : null
 	const handleInputChange = (evt) => {
 		setUser({
 			...user,
@@ -21,7 +23,13 @@ export default function Register() {
 		};
 
 		// Make fetch call with the object as the body of the POST request
-		register(new_user).then(history.push('/'));
+		register(new_user)
+			.then(response => {
+				if (response === true) {
+					history.push({pathname:'/', state: {articleId: articleId}});
+				} else window.alert('Username already exists. Please use another.')
+			});
+		// register(new_user).then(history.push({pathname:'/', state: {articleId: articleId}}));
 	};
 	return (
 		<main style={{ textAlign: 'center' }}>
@@ -105,6 +113,9 @@ export default function Register() {
 					<button type="submit">Register</button>
 				</fieldset>
 			</form>
+			<br/>
+			<p>Already have an account?</p>
+			<button><Link style={{ color: 'black' }} to={{pathname:'/login', state: {articleId: articleId}}}>Login</Link></button>
 		</main>
 	);
 }

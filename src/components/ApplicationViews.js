@@ -9,6 +9,8 @@ export default function ApplicationViews() {
         <React.Fragment>
             {/* HOME VIEW */}
             <Route exact path="/" component={Home} />
+            {/* <Route path="/feed" component={Home} /> */}
+            {/* <Route path="/feed/article/:articleId(\d+)" component={Home} /> */}
 
             {/* FEED ROUTES */}
             <Route path="/feed/:feedId(\d+)" render={props => <p>SINGLE FEED</p>} />

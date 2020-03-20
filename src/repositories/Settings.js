@@ -1,4 +1,4 @@
 export default {
     remoteURL: "http://localhost:8000",
-    token: 'tldrss_token'
+    token_key: 'tldrss_token'
 }
