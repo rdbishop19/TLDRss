@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
-import { useHistory } from 'react-router-dom';
+import { useHistory, useLocation } from 'react-router-dom';
 import { login } from './simpleAuth';
 
 export default function Login() {
 	const [ user, setUser ] = useState();
 	const history = useHistory();
+	const location = useLocation()
+	const articleId = location.state ? location.state.articleId : null
 
 	const handleInputChange = (evt) => {
 		setUser({
@@ -25,7 +27,7 @@ export default function Login() {
 		// Make fetch call with the object as the body of the POST request
 		login(credentials).then((response) => {
 			if (response === true) {
-				history.push('/');
+				history.push({pathname:'/', state: {articleId: articleId}});
 			} else window.alert('Username/password combination do not exist');
 		});
 	};

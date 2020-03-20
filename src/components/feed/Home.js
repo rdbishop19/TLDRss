@@ -4,8 +4,14 @@ import Article from './Article';
 import './Home.css';
 import FeedContainer from './FeedContainer';
 import SummaryContainer from './SummaryContainer';
+import { isAuthenticated } from '../auth/simpleAuth';
+import { useLocation } from 'react-router-dom';
 
 export default function Home() {
+
+	const location = useLocation()
+	const prevArticleId = location.state ? location.state.articleId : null
+
 	const [ feed, setFeed ] = useState({
 		previous: null,
 		next: null,
@@ -31,18 +37,33 @@ export default function Home() {
 		}
 	};
 
-	const getSummaries = (articleId) => {
-		if(selectedArticle){
-			if (window.confirm("Clear current submission?")){
-				setSelectedArticle(articleId);
-			} else return
+	const getPrevArticle = () => {
+		if (prevArticleId) {
+			getSummaries(prevArticleId)
 		}
-		setSelectedArticle(articleId)
-		ApiManager.getAll(`summaries?article=${articleId}&user=true`).then((res) => setUserSummary(res.results[0]));
+	}
+
+	const getSummaries = (articleId) => {
+		// if(selectedArticle){
+		// 	if (window.confirm("Clear current submission?")){
+		// 		setSelectedArticle(articleId);
+		// 	} else return
+		// }
+		setSelectedArticle(articleId);
+		if (isAuthenticated()){
+			ApiManager.getAll(`summaries?article=${articleId}&user=true`).then((res) => setUserSummary(res.results[0]));
+		}
 		ApiManager.getAll(`summaries?article=${articleId}`).then(setSummaries);
 	};
 
-	useEffect(getFeed, []);
+	const postNewSummary = (item) => {
+		ApiManager.post('summaries', item).then(() => getSummaries(selectedArticle));
+	};
+
+	useEffect(()=> {
+		getFeed()
+		getPrevArticle()
+	}, []);
 
 	return (
 		<React.Fragment>
@@ -65,7 +86,11 @@ export default function Home() {
 				</div>
 				<div className="right">
 					{selectedArticle && (
-						<SummaryContainer summaries={summaries} userSummary={userSummary} selected={selectedArticle} />
+						<SummaryContainer 
+							summaries={summaries}
+							userSummary={userSummary}
+							selected={selectedArticle}
+							methods={{postNewSummary}} />
 					)}
 				</div>
 			</div>
