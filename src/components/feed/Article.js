@@ -2,9 +2,9 @@ import React from 'react';
 import './Article.css';
 import ArticleData from './ArticleData';
 
-export default function Article({ article, number, methods }) {
+export default function Article({ article, number, methods, index }) {
 	return (
-		<tr className="article">
+		<tr className="article" onClick={(e)=>methods.clickTest(e, index)}>
 			<td className="number">
 				<span >{number}.</span>
 			</td>

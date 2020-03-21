@@ -37,6 +37,13 @@ export default function Home() {
 		}
 	};
 
+	const clickTest = (event, index) => {
+		console.log('clicked', index, event.target)
+		// if (event.target.className === "arrow-right"){
+		// 	console.log('clicked', index, event.target)
+		// }
+	}
+
 	const getPrevArticle = () => {
 		if (prevArticleId) {
 			getSummaries(prevArticleId)
@@ -82,7 +89,7 @@ export default function Home() {
 			<span>{feed.count && `(${feed.count} articles)`}</span>
 			<div className="full">
 				<div className="left">
-					<FeedContainer feed={feed} methods={{ getSummaries }} />
+					<FeedContainer feed={feed} methods={{ getSummaries, clickTest }} />
 				</div>
 				<div className="right">
 					{selectedArticle && (
