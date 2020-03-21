@@ -29,6 +29,7 @@ function NavBar() {
                             <li className="nav-list-item"><NavLink activeClassName="active-link" to='/feed/saved'>saved</NavLink></li>
                             <li className="nav-list-item"><NavLink activeClassName="active-link" to='/feed/favorites'>favorites</NavLink></li>
                             <li className="nav-list-item"><NavLink activeClassName="active-link" to='/tldr'>tldr</NavLink></li>
+                            <li className="nav-list-item special"><NavLink activeClassName="active-special" className="special" to='/coronavirus'>coronavirus</NavLink></li>
                             <li className="nav-list-item float-right"><NavLink to='/login' onClick={handleLogout}>logout</NavLink></li>
                         </>
                             :

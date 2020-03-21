@@ -30,6 +30,7 @@
 	color: white;
 }
 
+
 .logo {
 	font-weight: bolder;
 }
@@ -44,9 +45,20 @@
 
 .active-link {
 	color: #66ff66;
+	font-weight: bolder;
 }
 
 a {
 	color: white;
 	text-decoration: none;
+}
+
+.special {
+	color: orange !important;
+	/* font-weight: bolder; */
+}
+
+.active-special {
+	font-weight: bolder;
+	text-decoration: underline;
 }

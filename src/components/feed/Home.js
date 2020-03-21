@@ -27,7 +27,11 @@ export default function Home() {
 	const updateLoading = () => setLoading((prevState) => !prevState);
 	const getFeed = () => {
 		updateLoading();
-		ApiManager.getAll('articles').then(setFeed).then(updateLoading);
+		if (location.pathname === '/coronavirus'){
+			ApiManager.getAll('articles?coronavirus=true').then(setFeed).then(updateLoading);
+		} else {
+			ApiManager.getAll('articles').then(setFeed).then(updateLoading);
+		}
 	};
 
 	const getNewPage = (url) => {
