@@ -37,8 +37,10 @@ export default function Home() {
 		}
 	};
 
+	const [selectedIndex, setSelectedIndex ] = useState(-1)
 	const clickTest = (event, index) => {
 		console.log('clicked', index, event.target)
+		setSelectedIndex(index)
 		// if (event.target.className === "arrow-right"){
 		// 	console.log('clicked', index, event.target)
 		// }
@@ -89,7 +91,7 @@ export default function Home() {
 			<span>{feed.count && `(${feed.count} articles)`}</span>
 			<div className="full">
 				<div className="left">
-					<FeedContainer feed={feed} methods={{ getSummaries, clickTest }} />
+					<FeedContainer feed={feed} methods={{ getSummaries, clickTest }} config={{selectedIndex}}/>
 				</div>
 				<div className="right">
 					{selectedArticle && (
