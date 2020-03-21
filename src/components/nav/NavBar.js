@@ -1,15 +1,26 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { NavLink, useHistory, useLocation } from 'react-router-dom'
 import { logout, isAuthenticated } from '../auth/simpleAuth'
 import './Nav.css'
 import { withRouter } from 'react-router-dom';
 
 function NavBar() {
-
+    
     const history = useHistory()
     const location = useLocation()
+
     const articleId = location.state ? location.state.articleId : null
     
+    const [searchText, setSearchText ] = useState('')
+
+    const handleChange = evt => {
+        setSearchText(evt.target.value)
+    }
+    const handleSubmit = evt => {
+        evt.preventDefault()
+        // console.log('search', searchText)
+        history.push({pathname:'/feed', search: `filter=${searchText}`})
+    }
     const handleLogout = () => {
         if (window.confirm("Are you sure you want to logout?")){
                 logout()
@@ -30,6 +41,9 @@ function NavBar() {
                             <li className="nav-list-item"><NavLink activeClassName="active-link" to='/feed/favorites'>favorites</NavLink></li>
                             <li className="nav-list-item"><NavLink activeClassName="active-link" to='/tldr'>tldr</NavLink></li>
                             <li className="nav-list-item special"><NavLink activeClassName="active-special" className="special" to='/coronavirus'>coronavirus</NavLink></li>
+                            <li className="nav-list-item">
+                                <form onSubmit={handleSubmit}><input onChange={handleChange} className="search" placeholder="search" value={searchText}/></form>
+                            </li>
                             <li className="nav-list-item float-right"><NavLink to='/login' onClick={handleLogout}>logout</NavLink></li>
                         </>
                             :

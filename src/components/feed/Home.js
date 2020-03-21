@@ -6,12 +6,20 @@ import FeedContainer from './FeedContainer';
 import SummaryContainer from './SummaryContainer';
 import { isAuthenticated } from '../auth/simpleAuth';
 import { useLocation } from 'react-router-dom';
+import { parse } from 'query-string';
 
 export default function Home() {
 
 	const location = useLocation()
 	const prevArticleId = location.state ? location.state.articleId : null
 
+    // console.log(location.search);
+    //=> '?foo=bar'
+     
+	const parsed = parse(location.search);
+	
+	const [ searchTerm, setSearchTerm ] = useState(null)
+	
 	const [ feed, setFeed ] = useState({
 		previous: null,
 		next: null,
@@ -27,7 +35,10 @@ export default function Home() {
 	const updateLoading = () => setLoading((prevState) => !prevState);
 	const getFeed = () => {
 		updateLoading();
-		if (location.pathname === '/coronavirus'){
+		if (location.search) {
+			ApiManager.getAll(`articles?search=${parsed.filter}`).then(setFeed).then(updateLoading);
+		}
+		else if (location.pathname === '/coronavirus'){
 			ApiManager.getAll('articles?coronavirus=true').then(setFeed).then(updateLoading);
 		} else {
 			ApiManager.getAll('articles').then(setFeed).then(updateLoading);
@@ -65,9 +76,11 @@ export default function Home() {
 	};
 
 	useEffect(()=> {
+		// console.log('useEffect')
+		setSearchTerm(parsed.filter)
 		getFeed()
 		getPrevArticle()
-	}, []);
+	}, [parsed.filter]);
 
 	return (
 		<React.Fragment>
