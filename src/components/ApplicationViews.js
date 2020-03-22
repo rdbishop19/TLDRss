@@ -12,10 +12,10 @@ export default function ApplicationViews() {
             {/* <Route path="/feed" component={Home} /> */}
             {/* <Route path="/feed/article/:articleId(\d+)" component={Home} /> */}
             <Route path="/coronavirus" component={Home} />
-            <Route path="/feed" component={Home} />
+            <Route exact path="/feed" component={Home} />
 
             {/* FEED ROUTES */}
-            <Route path="/feed/:feedId(\d+)" render={props => <p>SINGLE FEED</p>} />
+            <Route path="/feed/source/:feedId(\d+)" component={Home} />
             <Route path="/feed/custom" render={props => <p>MY FEED</p>} />
             <Route path="/feed/saved" render={props => <p>SAVED ITEMS</p>} />
             <Route path="/feed/favorites" render={props => <p>FAVORITES</p>} />
