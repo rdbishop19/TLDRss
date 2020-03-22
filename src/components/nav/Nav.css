@@ -26,13 +26,17 @@
 	float: left;
 	margin: 4pt;
 	border-right: 1px solid grey;
-	padding-right: 5px;
+	padding-right: 10px;
 	color: white;
 }
 
 
 .logo {
+	color: #333;
 	font-weight: bolder;
+	background-color: #66ff66;
+	border-radius: 2px;
+	padding-left: 5px;
 }
 
 .logo-rss {
@@ -54,13 +58,16 @@ a {
 }
 
 .special {
-	color: orange !important;
+	color: orange;
 	/* font-weight: bolder; */
 }
 
 .active-special {
+	padding: 2px;
+	color: #333;
+	background-color: orange;
 	font-weight: bolder;
-	text-decoration: underline;
+	/* text-decoration: underline; */
 }
 
 .search {
@@ -68,4 +75,13 @@ a {
 	font-family: 'Courier New', Courier, monospace;
 	border: none;
 	margin-left: 30px;
+}
+
+.username {
+	color: rgb(67, 255, 255);
+	font-size: medium;
+}
+
+.logout { 
+	color: red;
 }
