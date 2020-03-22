@@ -86,6 +86,10 @@ export default function Home() {
 		ApiManager.post('summaries', item).then(() => getSummaries(selectedArticle));
 	};
 
+	const deleteSummary = url => {
+		ApiManager.delete(url).then(() => getSummaries(selectedArticle))
+	}
+
 	useEffect(
 		() => {
 			// console.log('useEffect')
@@ -146,7 +150,7 @@ export default function Home() {
 							summaries={summaries}
 							userSummary={userSummary}
 							selected={selectedArticle}
-							methods={{ postNewSummary }}
+							methods={{ postNewSummary, deleteSummary }}
 						/>
 					)}
 				</div>

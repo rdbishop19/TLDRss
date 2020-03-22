@@ -53,5 +53,14 @@ export default {
         };
         const e = await fetch(`${Settings.remoteURL}/${endpoint}`, settings)
         return await e.json()
+    },
+
+    async delete(fullUrl) {
+        const settings = {
+            'method': 'DELETE',
+            'headers': getHeaders()
+        }
+        const e = await fetch(fullUrl, settings)
+        return await e
     }
 };
