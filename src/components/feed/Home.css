@@ -1,3 +1,7 @@
+.feed-nav {
+	margin: 10px;
+}
+
 .button-container button {
 	border-radius: 3px;
 	font-family: 'Courier New', Courier, monospace;
@@ -19,4 +23,8 @@ h2 {
 	display: table-cell;
 	width: 30%;
 	padding-left: 30px;
+}
+
+.subscribe {
+	margin-left: 100px;
 }

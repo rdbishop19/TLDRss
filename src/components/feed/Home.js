@@ -1,27 +1,26 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useEffect } from 'react';
 import ApiManager from '../../modules/ApiManager';
 import Article from './Article';
 import './Home.css';
-import './LoadSymbol.css'
-import './NewPageLoader.css'
+import './LoadSymbol.css';
+import './NewPageLoader.css';
 import FeedContainer from './FeedContainer';
 import SummaryContainer from './SummaryContainer';
 import { isAuthenticated } from '../auth/simpleAuth';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useParams } from 'react-router-dom';
 import { parse } from 'query-string';
 
 export default function Home() {
+	const location = useLocation();
+	const params = useParams();
 
-	const location = useLocation()
-	const prevArticleId = location.state ? location.state.articleId : null
+	const prevArticleId = location.state ? location.state.articleId : null;
 
-    // console.log(location.search);
-    //=> '?foo=bar'
-     
 	const parsed = parse(location.search);
-	
-	const [ searchTerm, setSearchTerm ] = useState(null)
-	
+
+	const [ searchTerm, setSearchTerm ] = useState(null);
+
 	const [ feed, setFeed ] = useState({
 		previous: null,
 		next: null,
@@ -37,14 +36,24 @@ export default function Home() {
 	const updateLoading = () => setLoading((prevState) => !prevState);
 	const getFeed = () => {
 		updateLoading();
-		if (location.search) {
+		if (params.feedId) {
+			ApiManager.getAll(`articles?feed=${params.feedId}`).then(setFeed).then(updateLoading);
+		} else if (location.search) {
 			ApiManager.getAll(`articles?search=${parsed.filter}`).then(setFeed).then(updateLoading);
-		}
-		else if (location.pathname === '/coronavirus'){
+		} else if (location.pathname === '/coronavirus') {
 			ApiManager.getAll('articles?coronavirus=true').then(setFeed).then(updateLoading);
+		} else if (location.pathname === '/feed/custom') {
+			ApiManager.getAll('articles?custom=true').then(setFeed).then(updateLoading)
 		} else {
 			ApiManager.getAll('articles').then(setFeed).then(updateLoading);
 		}
+	};
+
+	const updateFeedSubscription = (feedId) => {
+		const newFeed = {
+			feed_id: feedId
+		}
+		ApiManager.post('myfeeds', newFeed)
 	};
 
 	const getNewPage = (url) => {
@@ -56,9 +65,9 @@ export default function Home() {
 
 	const getPrevArticle = () => {
 		if (prevArticleId) {
-			getSummaries(prevArticleId)
+			getSummaries(prevArticleId);
 		}
-	}
+	};
 
 	const getSummaries = (articleId) => {
 		// if(selectedArticle){
@@ -67,7 +76,7 @@ export default function Home() {
 		// 	} else return
 		// }
 		setSelectedArticle(articleId);
-		if (isAuthenticated()){
+		if (isAuthenticated()) {
 			ApiManager.getAll(`summaries?article=${articleId}&user=true`).then((res) => setUserSummary(res.results[0]));
 		}
 		ApiManager.getAll(`summaries?article=${articleId}`).then(setSummaries);
@@ -77,45 +86,68 @@ export default function Home() {
 		ApiManager.post('summaries', item).then(() => getSummaries(selectedArticle));
 	};
 
-	useEffect(()=> {
-		// console.log('useEffect')
-		setSearchTerm(parsed.filter)
-		getFeed()
-		getPrevArticle()
-	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [parsed.filter]);
+	useEffect(
+		() => {
+			// console.log('useEffect')
+			setSearchTerm(parsed.filter);
+			getFeed();
+			getPrevArticle();
+		},
+		[ parsed.filter ]
+	);
 
 	return (
 		<React.Fragment>
-			<span className="button-container">
-				<button disabled={loading || !feed.previous} onClick={() => getNewPage(feed.previous)}>
-					Prev
-				</button>
-				<button disabled={loading || !feed.next} onClick={() => getNewPage(feed.next)}>
-					Next
-				</button>
-			</span>
-			<span style={{ visibility: feed.results.length && loading ? 'visible' : 'hidden' }} className="lds-ellipsis"><span></span><span></span><span></span><span></span></span>
-			<br/>
-			<span>{feed.count && `(${feed.count} articles)`}</span>
+			<div className="feed-nav">
+				<span className="button-container">
+					<button disabled={loading || !feed.previous} onClick={() => getNewPage(feed.previous)}>
+						Prev
+					</button>
+					<button disabled={loading || !feed.next} onClick={() => getNewPage(feed.next)}>
+						Next
+					</button>
+				</span>
+				<span
+					style={{ visibility: feed.results.length && loading ? 'visible' : 'hidden' }}
+					className="lds-ellipsis"
+				>
+					<span />
+					<span />
+					<span />
+					<span />
+				</span>
+				{/* <br /> */}
+				{params.feedId &&
+				feed.results.length > 0 && (
+					<span className="button-container subscribe">
+						<button onClick={()=>updateFeedSubscription(params.feedId)}>
+							Add {feed.results[0].feed.name} to my feed
+						</button>
+					</span>
+				)}
+				<br />
+			</div>
+			<span>{feed.results.length > 0 && `(${feed.count} articles)`}</span>
 			<div className="full">
 				<div className="left">
-					{feed.results.length ? 
-						<FeedContainer feed={feed} methods={{ getSummaries }} /> : 
-						<>
-							<div className="lds-hourglass"></div>
+					{feed.results.length ? (
+						<FeedContainer feed={feed} methods={{ getSummaries }} />
+					) : (
+						<React.Fragment>
+							<div className="lds-hourglass" />
 							<div>fetching articles...</div>
-							<br/>
-						</>
-					}
+							<br />
+						</React.Fragment>
+					)}
 				</div>
 				<div className="right">
 					{selectedArticle && (
-						<SummaryContainer 
+						<SummaryContainer
 							summaries={summaries}
 							userSummary={userSummary}
 							selected={selectedArticle}
-							methods={{postNewSummary}} />
+							methods={{ postNewSummary }}
+						/>
 					)}
 				</div>
 			</div>
