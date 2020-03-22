@@ -17,6 +17,7 @@ h2 {
 }
 .left {
 	display: table-cell;
+	vertical-align: top;
 	width: 70%;
 }
 .right {

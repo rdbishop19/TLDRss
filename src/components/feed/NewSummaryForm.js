@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import './Form.css';
 
-export default function NewSummaryForm({ selected, methods: { postNewSummary } }) {
-	const [ summaryText, setSummaryText ] = useState('');
+export default function NewSummaryForm({ selected, methods: { postNewSummary, patchSummary }, userSummary, status }) {
+    const [ summaryText, setSummaryText ] = useState(
+        status ? userSummary.summary_text : ''
+    );
 	const [ charCount, setCharCount ] = useState(255);
 
 	const handleChange = (evt) => {
@@ -12,19 +14,29 @@ export default function NewSummaryForm({ selected, methods: { postNewSummary } }
 	const handleSubmit = (evt) => {
 		evt.preventDefault();
 
-		const new_summary = {
-			summary_text: summaryText,
-			article_id: selected
-		};
+        // handle EDIT (PATCH) request
+        if (status) {
+            const edited_summary = {
+                summary_text: summaryText
+            }
+            patchSummary(userSummary.url, edited_summary)
 
-		postNewSummary(new_summary);
+        }
+        // handle CREATE (POST) request
+        else {
+            const new_summary = {
+                summary_text: summaryText,
+                article_id: selected
+            };
+    
+            postNewSummary(new_summary);
+        }
 	};
 
-	useEffect(() => setSummaryText(''), [ selected ]);
+	// useEffect(() => setSummaryText(''), [ selected ]);
 
 	return (
 		<React.Fragment>
-			{/* <ArticleData article={article} /> */}
 			<form onSubmit={handleSubmit}>
 				<label className="form-label">
 					Enter 'Too Long; Didn't Read' (<a href="https://www.merriam-webster.com/dictionary/TL%3BDR">

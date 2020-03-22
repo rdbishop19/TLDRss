@@ -13,6 +13,7 @@ export default function UserSummary({ userSummary, methods, isCurrentUser }) {
 			{isCurrentUser === true && (
 				<div className="button-container" title="remove summary">
 					<button onClick={() => methods.deleteSummary(userSummary.url)}>del</button>
+					<button onClick={() => methods.openEditDialog(userSummary.url)}>edit</button>
 				</div>
 			)}
 		</React.Fragment>
