@@ -32,6 +32,7 @@ export default function Home() {
 	});
 	const [ selectedArticle, setSelectedArticle ] = useState(null);
 	const [ userSummary, setUserSummary ] = useState(null);
+	const [ isEditing, setIsEditing ] = useState(false)
 
 	const updateLoading = () => setLoading((prevState) => !prevState);
 	const getFeed = () => {
@@ -75,6 +76,7 @@ export default function Home() {
 		// 		setSelectedArticle(articleId);
 		// 	} else return
 		// }
+		setIsEditing(false);
 		setSelectedArticle(articleId);
 		if (isAuthenticated()) {
 			ApiManager.getAll(`summaries?article=${articleId}&user=true`).then((res) => setUserSummary(res.results[0]));
@@ -85,6 +87,14 @@ export default function Home() {
 	const postNewSummary = (item) => {
 		ApiManager.post('summaries', item).then(() => getSummaries(selectedArticle));
 	};
+
+	const patchSummary = (url, obj) => {
+		ApiManager.patch(url, obj).then(()=> getSummaries(selectedArticle));
+	}
+
+	const openEditDialog = (url) => {
+		setIsEditing(true)
+	}
 
 	const deleteSummary = url => {
 		ApiManager.delete(url).then(() => getSummaries(selectedArticle))
@@ -150,7 +160,8 @@ export default function Home() {
 							summaries={summaries}
 							userSummary={userSummary}
 							selected={selectedArticle}
-							methods={{ postNewSummary, deleteSummary }}
+							status={isEditing}
+							methods={{ postNewSummary, deleteSummary, openEditDialog, patchSummary }}
 						/>
 					)}
 				</div>

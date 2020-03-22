@@ -62,5 +62,15 @@ export default {
         }
         const e = await fetch(fullUrl, settings)
         return await e
+    },
+
+    async patch(fullUrl, editedItem) {
+        const settings = {
+            'method': 'PATCH',
+            'headers': getHeaders(),
+            'body': JSON.stringify(editedItem)
+        }
+        const e = await fetch(fullUrl, settings)
+        return await e
     }
 };
