@@ -8,7 +8,7 @@ import './NewPageLoader.css';
 import FeedContainer from './FeedContainer';
 import SummaryContainer from './SummaryContainer';
 import { isAuthenticated } from '../auth/simpleAuth';
-import { useLocation, useParams } from 'react-router-dom';
+import { useLocation, useParams, Link } from 'react-router-dom';
 import { parse } from 'query-string';
 
 export default function Home() {
@@ -120,24 +120,24 @@ export default function Home() {
 				{params.feedId &&
 				feed.results.length > 0 && (
 					<span className="button-container subscribe">
-						<button onClick={()=>updateFeedSubscription(params.feedId)}>
+						{isAuthenticated() ? <button onClick={()=>updateFeedSubscription(params.feedId)}>
 							Add {feed.results[0].feed.name} to my feed
-						</button>
+						</button> : <Link style={{color:"orange"}}to="/login">Login to subscribe to feed sources</Link>}
 					</span>
 				)}
 				<br />
 			</div>
 			<span>{feed.results.length > 0 && `(${feed.count} articles)`}</span>
 			<div className="full">
-				<div className="left">
+				<div className="left">   
 					{feed.results.length ? (
 						<FeedContainer feed={feed} methods={{ getSummaries }} />
-					) : (
+					) : ( loading ? 
 						<React.Fragment>
 							<div className="lds-hourglass" />
 							<div>fetching articles...</div>
 							<br />
-						</React.Fragment>
+						</React.Fragment> : <p>No results for "{parsed.filter}"</p>
 					)}
 				</div>
 				<div className="right">
