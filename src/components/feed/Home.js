@@ -17,9 +17,6 @@ export default function Home() {
 
 	const prevArticleId = location.state ? location.state.articleId : null;
 
-	// console.log(location.search);
-	//=> '?foo=bar'
-
 	const parsed = parse(location.search);
 
 	const [ searchTerm, setSearchTerm ] = useState(null);
@@ -45,13 +42,14 @@ export default function Home() {
 			ApiManager.getAll(`articles?search=${parsed.filter}`).then(setFeed).then(updateLoading);
 		} else if (location.pathname === '/coronavirus') {
 			ApiManager.getAll('articles?coronavirus=true').then(setFeed).then(updateLoading);
+		} else if (location.pathname === '/feed/custom') {
+			ApiManager.getAll('articles?custom=true').then(setFeed).then(updateLoading)
 		} else {
 			ApiManager.getAll('articles').then(setFeed).then(updateLoading);
 		}
 	};
 
 	const updateFeedSubscription = (feedId) => {
-		console.log('subscribe to', feedId)
 		const newFeed = {
 			feed_id: feedId
 		}
