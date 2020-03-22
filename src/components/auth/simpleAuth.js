@@ -15,8 +15,10 @@ const login = credentials => {
     })
     .then(res => res.json())
     .then(res => {
+        // console.log(res)
         if ('valid' in res && res.valid && 'token' in res){
             sessionStorage.setItem(Settings.token_key, res.token)
+            sessionStorage.setItem("user", JSON.stringify(res.user))
             return true
         }
     })
@@ -33,9 +35,10 @@ const register = userInfo => {
     })
     .then(res => res.json())
     .then(res => {
-        console.log('register', res)
+        // console.log('register', res)
         if ('token' in res) {
             sessionStorage.setItem(Settings.token_key, res.token)
+            sessionStorage.setItem("user", JSON.stringify(res.user))
             return true
         }
     })
@@ -43,6 +46,7 @@ const register = userInfo => {
 
 const logout = () => {
     sessionStorage.removeItem(Settings.token_key)
+    sessionStorage.removeItem("user")
 }
 
 export { isAuthenticated, login, logout, register }
