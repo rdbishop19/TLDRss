@@ -95,7 +95,7 @@ export default function Home() {
 					Next
 				</button>
 			</span>
-			<span style={{ visibility: feed.results.length && loading ? 'visible' : 'hidden' }} class="lds-ellipsis"><span></span><span></span><span></span><span></span></span>
+			<span style={{ visibility: feed.results.length && loading ? 'visible' : 'hidden' }} className="lds-ellipsis"><span></span><span></span><span></span><span></span></span>
 			<br/>
 			<span>{feed.count && `(${feed.count} articles)`}</span>
 			<div className="full">
@@ -103,7 +103,7 @@ export default function Home() {
 					{feed.results.length ? 
 						<FeedContainer feed={feed} methods={{ getSummaries }} /> : 
 						<>
-							<div class="lds-hourglass"></div>
+							<div className="lds-hourglass"></div>
 							<div>fetching articles...</div>
 							<br/>
 						</>
