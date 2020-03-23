@@ -7,6 +7,7 @@ export default function Login() {
 	const history = useHistory();
 	const location = useLocation()
 	const articleId = location.state ? location.state.articleId : null
+	const feedId = location.state ? location.state.feedId : null
 
 	const handleInputChange = (evt) => {
 		setUser({
@@ -27,7 +28,7 @@ export default function Login() {
 		// Make fetch call with the object as the body of the POST request
 		login(credentials).then((response) => {
 			if (response === true) {
-				history.push({pathname:'/', state: {articleId: articleId}});
+				history.push({pathname: feedId ? `/feed/source/${feedId}` : "/", state: {articleId: articleId, feedId: feedId}});
 			} else window.alert('Username/password combination do not exist');
 		});
 	};
@@ -67,7 +68,7 @@ export default function Login() {
 			</form>
 			<br/>
 			<p>First time here? Join us!</p>
-			<button><Link style={{ color: 'black' }} to={{pathname:'/register', state: {articleId: articleId}}}>Register</Link></button>
+			<button><Link style={{ color: 'black' }} to={{pathname:'/register', state: {articleId: articleId, feedId: feedId}}}>Register</Link></button>
 		</main>
 	);
 }

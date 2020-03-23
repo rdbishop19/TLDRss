@@ -158,7 +158,7 @@ export default function Home() {
 					<span className="button-container subscribe">
 						{isAuthenticated() ? <button onClick={()=>updateFeedSubscription(params.feedId)}>
 							Add {feed.results[0].feed.name} to my feed
-						</button> : <Link style={{color:"orange"}}to="/login">Login to subscribe to feed sources</Link>}
+						</button> : <Link style={{color:"orange"}} to={{pathname:"/login", state:{feedId: feed.results[0].feed.id }}}>Login to subscribe to feed sources</Link>}
 					</span>
 				)}
 				<br />
