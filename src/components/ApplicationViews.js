@@ -17,7 +17,7 @@ export default function ApplicationViews() {
             {/* FEED ROUTES */}
             <Route path="/feed/source/:feedId(\d+)" component={Home} />
             <Route path="/feed/custom" component={Home} />
-            <Route path="/feed/saved" render={props => <p>SAVED ITEMS</p>} />
+            <Route path="/feed/saved" component={Home} />
             <Route path="/feed/favorites" render={props => <p>FAVORITES</p>} />
 
             {/* SUMMARY ROUTES */}
