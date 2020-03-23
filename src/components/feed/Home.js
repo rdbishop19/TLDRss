@@ -66,9 +66,12 @@ export default function Home() {
 		}
 	};
 
+	// handle redirect from register/login; otherwise, get first article info
 	const getPrevArticle = () => {
 		if (prevArticleId) {
 			getSummaries(prevArticleId);
+		} else if (feed.results.length) {
+			getSummaries(feed.results[0].id);
 		}
 	};
 
@@ -112,6 +115,8 @@ export default function Home() {
 	const deleteSummary = url => {
 		ApiManager.delete(url).then(() => getSummaries(selectedArticle))
 	}
+
+	useEffect(getPrevArticle, [feed])
 
 	useEffect(
 		() => {
