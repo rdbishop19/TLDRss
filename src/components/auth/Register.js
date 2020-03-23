@@ -7,6 +7,8 @@ export default function Register() {
 	const history = useHistory();
 	const location = useLocation()
 	const articleId = location.state ? location.state.articleId : null
+	const feedId = location.state ? location.state.feedId : null
+
 	const handleInputChange = (evt) => {
 		setUser({
 			...user,
@@ -26,7 +28,7 @@ export default function Register() {
 		register(new_user)
 			.then(response => {
 				if (response === true) {
-					history.push({pathname:'/', state: {articleId: articleId}});
+					history.push({pathname: feedId ? `/feed/source/${feedId}` : "/", state: {articleId: articleId, feedId: feedId}});
 				} else window.alert('Username already exists. Please use another.')
 			});
 		// register(new_user).then(history.push({pathname:'/', state: {articleId: articleId}}));

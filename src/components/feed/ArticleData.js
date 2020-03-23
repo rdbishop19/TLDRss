@@ -1,6 +1,7 @@
 import React from 'react';
 import moment from 'moment';
 import { Link, useLocation } from 'react-router-dom';
+import { isAuthenticated } from '../auth/simpleAuth';
 
 export default function ArticleData({ article, methods, isMainView, isLoggedIn }) {
 
@@ -25,9 +26,9 @@ export default function ArticleData({ article, methods, isMainView, isLoggedIn }
 			<div className="article-extras">
 				<span className="timestamp">{article.pub_date ? moment(article.pub_date).fromNow() : 'some time ago'}</span>{" | "}
 				{isMainView && <><span className="fake-link" title="view tl;drs" onClick={()=>methods.getSummaries(article.id)}>TL;DR</span>{" | "}</>}
-				{isMainView && (
+				{(isMainView && isLoggedIn) && (
 					<React.Fragment>
-						{isLoggedIn && location.pathname === "/feed/saved" ? 
+						{location.pathname === "/feed/saved" ? 
 						<>
 							<span className="fake-link" title="read later" onClick={()=>methods.deleteSavedArticle(article.url)}>
 								remove
