@@ -32,7 +32,7 @@ export default function SummaryContainer({ summaries, userSummary, selected, met
 		<React.Fragment>
 			{loading ? <span className="lds-dual-ring">loading...</span> :
 			<React.Fragment>
-				<ArticleData article={article} />
+				<ArticleData article={article} isLoggedIn={isAuthenticated()} methods={methods}/>
 				<br/>
 				{isAuthenticated() ? (userSummary && !status) ? (
 					<React.Fragment>
