@@ -6,6 +6,7 @@ import ApiManager from '../../modules/ApiManager';
 import { isAuthenticated } from '../auth/simpleAuth';
 import { Link } from 'react-router-dom';
 import './ArticleLoad.css';
+import SummaryList from './SummaryList';
 
 export default function SummaryContainer({ summaries, userSummary, selected, methods, status }) {
 	const [ loading, setLoading ] = useState(false)
@@ -34,7 +35,7 @@ export default function SummaryContainer({ summaries, userSummary, selected, met
 				<ArticleData article={article} />
 				{isAuthenticated() ? (userSummary && !status) ? (
 					<React.Fragment>
-						<p>Your TL;DR</p>
+						<p className="section-header">Your TL;DR</p>
 						<UserSummary isCurrentUser={true} userSummary={userSummary} methods={methods} />
 					</React.Fragment>
 				) : (
@@ -47,8 +48,7 @@ export default function SummaryContainer({ summaries, userSummary, selected, met
 						Login to add a summary
 					</Link>
 				)}
-				<p>Community TL;DRs</p>
-				{summaries.results.map((summary, index) => <UserSummary key={index} userSummary={summary} />)}
+				<SummaryList summaries={summaries} />
 			</React.Fragment>}
 		</React.Fragment>
 	);

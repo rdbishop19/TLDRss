@@ -13,6 +13,7 @@ export default function FeedContainer({ feed, methods }) {
 							article={article}
 							number={(feed.page-1)*25+(index + 1)}
 							methods={methods}
+							isMainView={true}
 						/>
 					);
 				})}

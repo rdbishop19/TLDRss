@@ -8,7 +8,7 @@ export default function UserSummary({ userSummary, methods, isCurrentUser }) {
 			<span className="username">{userSummary.user.username}</span>
 			<span className="timestamp">{moment(userSummary.created_on).fromNow()}</span>
 			<div className="user-summary">
-				<p>{userSummary.summary_text}</p>
+				<span className="tldr-header">TL;DR: </span><span>{userSummary.summary_text}</span>
 			</div>
 			{isCurrentUser === true && (
 				<div className="button-container" title="remove summary">

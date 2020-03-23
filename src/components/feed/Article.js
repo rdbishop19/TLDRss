@@ -2,7 +2,7 @@ import React from 'react';
 import './Article.css';
 import ArticleData from './ArticleData';
 
-export default function Article({ article, number, methods }) {
+export default function Article({ article, number, methods, isMainView }) {
 	return (
 		<tr className="article">
 			<td className="number">
@@ -12,7 +12,7 @@ export default function Article({ article, number, methods }) {
                 <div className="arrow-up"></div>
             </td>
 			<td>
-			    <ArticleData article={article} methods={methods} />
+			    <ArticleData article={article} methods={methods} isMainView={isMainView}/>
 			</td>
             <td title="view tl;drs" onClick={()=>methods.getSummaries(article.id)} className="tldr-link">
                 <div className="arrow-right show-me"></div>
