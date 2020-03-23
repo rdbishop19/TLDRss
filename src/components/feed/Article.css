@@ -15,10 +15,16 @@
 	cursor: pointer;
 }
 
-.timestamp {
+.article-extras {
 	margin: 0px;
 	color: grey;
 	font-size: smaller;
+}
+
+.fake-link:hover {
+	cursor: pointer;
+	color: orangered;
+	text-decoration: underline;
 }
 
 .external-link {

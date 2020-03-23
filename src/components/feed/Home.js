@@ -45,6 +45,8 @@ export default function Home() {
 			ApiManager.getAll('articles?coronavirus=true').then(setFeed).then(updateLoading);
 		} else if (location.pathname === '/feed/custom') {
 			ApiManager.getAll('articles?custom=true').then(setFeed).then(updateLoading)
+		} else if (location.pathname === '/feed/saved') {
+			ApiManager.getAll('articles?saved=true').then(setFeed).then(updateLoading)
 		} else {
 			ApiManager.getAll('articles').then(setFeed).then(updateLoading);
 		}
@@ -96,6 +98,17 @@ export default function Home() {
 		setIsEditing(true)
 	}
 
+	const saveArticle = id => {
+		// console.log('saving', id)
+		ApiManager.post('savedarticles', { 'article_id': id}).then(res => {
+			if (res.url){
+				window.alert('Article saved to your reading list')
+			} else {
+				window.alert('Article already in your reading list')
+			}
+		})
+	}
+
 	const deleteSummary = url => {
 		ApiManager.delete(url).then(() => getSummaries(selectedArticle))
 	}
@@ -145,7 +158,7 @@ export default function Home() {
 			<div className="full">
 				<div className="left">   
 					{feed.results.length ? (
-						<FeedContainer feed={feed} methods={{ getSummaries }} />
+						<FeedContainer feed={feed} methods={{ getSummaries, saveArticle }} />
 					) : ( loading ? 
 						<React.Fragment>
 							<div className="lds-hourglass" />

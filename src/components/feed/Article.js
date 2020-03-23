@@ -12,7 +12,7 @@ export default function Article({ article, number, methods }) {
                 <div className="arrow-up"></div>
             </td>
 			<td>
-			    <ArticleData article={article} />
+			    <ArticleData article={article} methods={methods} />
 			</td>
             <td title="view tl;drs" onClick={()=>methods.getSummaries(article.id)} className="tldr-link">
                 <div className="arrow-right show-me"></div>
