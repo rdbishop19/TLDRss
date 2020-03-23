@@ -33,6 +33,7 @@ export default function SummaryContainer({ summaries, userSummary, selected, met
 			{loading ? <span className="lds-dual-ring">loading...</span> :
 			<React.Fragment>
 				<ArticleData article={article} />
+				<br/>
 				{isAuthenticated() ? (userSummary && !status) ? (
 					<React.Fragment>
 						<p className="section-header">Your TL;DR</p>

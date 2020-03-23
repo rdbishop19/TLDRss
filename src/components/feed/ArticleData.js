@@ -11,6 +11,7 @@ export default function ArticleData({ article, methods, isMainView }) {
 				target="_blank"
 				title={article.link}
 				className="article-link"
+				style={{ fontWeight: "bold", textDecoration: isMainView ? "none" : "underline"}}
 			>
 				{article.title}
 			</a>

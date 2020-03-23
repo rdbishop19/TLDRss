@@ -5,7 +5,8 @@
 }
 
 .timestamp {
-    font-size: smaller;
+    margin-left: 5px;
+    font-size: small;
     color: grey;
 }
 
@@ -44,7 +45,7 @@ textarea {
     margin: 5px 2px;
 }
 
-.instructions p span {
+.instructions p:nth-child(2) span {
     background-color: purple;
     color: yellow;
     padding: 2px;
@@ -52,4 +53,19 @@ textarea {
 
 .instructions p:nth-child(3) {
     text-decoration: underline;
+}
+
+.instructions p:nth-child(6) span {
+    cursor: crosshair;
+}
+
+.easter-egg {
+    text-align: center;
+    margin-top: 200px;
+}
+
+.easter-egg a {
+    color: purple;
+    font-weight: 900;
+    font-size: 16pt;
 }
