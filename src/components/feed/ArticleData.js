@@ -1,8 +1,10 @@
 import React from 'react';
 import moment from 'moment';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 
 export default function ArticleData({ article, methods, isMainView, isLoggedIn }) {
+
+	const location = useLocation()
 	return (
 		<React.Fragment>
 			<a
@@ -23,7 +25,22 @@ export default function ArticleData({ article, methods, isMainView, isLoggedIn }
 			<div className="article-extras">
 				<span className="timestamp">{article.pub_date ? moment(article.pub_date).fromNow() : 'some time ago'}</span>{" | "}
 				{isMainView && <><span className="fake-link" title="view tl;drs" onClick={()=>methods.getSummaries(article.id)}>TL;DR</span>{" | "}</>}
-				{isLoggedIn && <><span className="fake-link" title="read later" onClick={()=>methods.saveArticle(article.id)}>save</span>{" | "}</>}
+				{isMainView && (
+					<React.Fragment>
+						{isLoggedIn && location.pathname === "/feed/saved" ? 
+						<>
+							<span className="fake-link" title="read later" onClick={()=>methods.deleteSavedArticle(article.url)}>
+								remove
+							</span>{" | "}
+						</> :
+						<>
+							<span className="fake-link" title="read later" onClick={()=>methods.saveArticle(article.id)}>
+								save
+							</span>{" | "}
+						</>}
+					</React.Fragment>
+				)
+				}
 			</div>
 		</React.Fragment>
 	);
