@@ -43,13 +43,13 @@ function NavBar() {
                             <li className="nav-list-item"><NavLink activeClassName="active-link" to='/feed/saved'>saved</NavLink></li>
                             <li className="nav-list-item"><NavLink activeClassName="active-link" to='/feed/favorites'>favorites</NavLink></li>
                             <li className="nav-list-item"><NavLink activeClassName="active-link" to='/tldr'>tldr</NavLink></li>
-                            <li className="nav-list-item float-right logout"><NavLink to='/login' className="logout" onClick={handleLogout}>logout</NavLink></li>
+                            <li className="nav-list-item float-right logout"><NavLink to='/login' className="account" onClick={handleLogout}>logout</NavLink></li>
                             <li className="nav-list-item float-right username">{user && user.username}</li>
                         </>
                             :
                         <>
-                            <li className="nav-list-item float-right"><NavLink activeClassName="active-link" to={{pathname:'/register', state: {articleId: articleId}}}>register</NavLink></li>
-                            <li className="nav-list-item float-right"><NavLink activeClassName="active-link" to={{pathname:'/login', state: {articleId: articleId}}}>login</NavLink></li>
+                            <li className="nav-list-item float-right"><NavLink activeClassName="active-link" className="account" to={{pathname:'/register', state: {articleId: articleId}}}>register</NavLink></li>
+                            <li className="nav-list-item float-right"><NavLink activeClassName="active-link" className="account" to={{pathname:'/login', state: {articleId: articleId}}}>login</NavLink></li>
                         </>
                     }
                     <li className="nav-list-item special"><NavLink activeClassName="active-special" className="special" to='/coronavirus'>coronavirus</NavLink></li>

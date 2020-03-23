@@ -41,7 +41,7 @@ export default function NewSummaryForm({ selected, methods: { postNewSummary, pa
 				<label className="form-label">
 					Enter 'Too Long; Didn't Read' (<a href="https://www.merriam-webster.com/dictionary/TL%3BDR">
 						TL;DR
-					</a>) here
+					</a>)
 					<textarea className="text-area" value={summaryText} onChange={handleChange} required/>
 				</label>
 				<div className="button-container">

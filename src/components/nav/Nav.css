@@ -77,11 +77,22 @@ a {
 	margin-left: 30px;
 }
 
-.username {
+/* .username {
 	color: rgb(146, 46, 240);
 	font-size: medium;
+	background-color: yellow;
+	padding: 0px 3px;
+} */
+
+.username {
+	color: #333;
+	font-weight: bolder;
+	background-color: #66ff66;
+	border-radius: 2px;
+	padding-left: 8px;
 }
 
-.logout { 
-	color: red;
+.account { 
+	color: rgb(255, 98, 255);
+	font-weight: bolder;
 }

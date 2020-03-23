@@ -174,7 +174,7 @@ export default function Home() {
 							userSummary={userSummary}
 							selected={selectedArticle}
 							status={isEditing}
-							methods={{ postNewSummary, deleteSummary, openEditDialog, patchSummary }}
+							methods={{ postNewSummary, deleteSummary, openEditDialog, patchSummary, saveArticle }}
 						/>
 					)}
 				</div>
