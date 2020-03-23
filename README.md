@@ -6,7 +6,7 @@ Help curate and summarize the best and newest content on the web.
 
 ## Installation
 
-First, make sure you have the development API server running: [https://github.com/rdbishop19/TLDRss-api](Installation) 
+First, make sure you have the development API server running: [Installation](https://github.com/rdbishop19/TLDRss-api) 
 
 Clone this repository. `cd` into the project directory and run:
 
