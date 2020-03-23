@@ -112,6 +112,10 @@ export default function Home() {
 		})
 	}
 
+	const deleteSavedArticle = url => {
+		ApiManager.delete(url).then(getFeed)
+	}
+
 	const deleteSummary = url => {
 		ApiManager.delete(url).then(() => getSummaries(selectedArticle))
 	}
@@ -163,7 +167,7 @@ export default function Home() {
 			<div className="full">
 				<div className="left">   
 					{feed.results.length ? (
-						<FeedContainer feed={feed} methods={{ getSummaries, saveArticle }} />
+						<FeedContainer feed={feed} methods={{ getSummaries, saveArticle, deleteSavedArticle }} />
 					) : ( loading ? 
 						<React.Fragment>
 							<div className="lds-hourglass" />
