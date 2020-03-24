@@ -51,7 +51,7 @@ export default function Home() {
 		} else if (location.pathname === `/feed/favorites&sort=${sort}`) {
 			ApiManager.getAll(`articles?favorites=true`).then(setFeed).then(updateLoading)
 		} else {
-			ApiManager.getAll(`articles&sort=${sort}`).then(setFeed).then(updateLoading);
+			ApiManager.getAll(`articles?sort=${sort}`).then(setFeed).then(updateLoading);
 		}
 	};
 
