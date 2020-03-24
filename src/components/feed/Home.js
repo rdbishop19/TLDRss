@@ -39,19 +39,19 @@ export default function Home() {
 	const getFeed = () => {
 		updateLoading();
 		if (params.feedId) {
-			ApiManager.getAll(`articles?feed=${params.feedId}&sort=${sort}`).then(setFeed).then(updateLoading);
+			ApiManager.getAll(`articles?feed=${params.feedId}&sort=${sort}&relevant=${sort}`).then(setFeed).then(updateLoading);
 		} else if (location.search) {
-			ApiManager.getAll(`articles?search=${parsed.filter}&sort=${sort}`).then(setFeed).then(updateLoading);
+			ApiManager.getAll(`articles?search=${parsed.filter}&sort=${sort}&relevant=${sort}`).then(setFeed).then(updateLoading);
 		} else if (location.pathname === '/coronavirus') {
-			ApiManager.getAll(`articles?coronavirus=true&sort=${sort}`).then(setFeed).then(updateLoading);
+			ApiManager.getAll(`articles?coronavirus=true&sort=${sort}&relevant=${sort}`).then(setFeed).then(updateLoading);
 		} else if (location.pathname === '/feed/custom') {
-			ApiManager.getAll(`articles?custom=true&sort=${sort}`).then(setFeed).then(updateLoading)
-		} else if (location.pathname === `/feed/saved&sort=${sort}`) {
-			ApiManager.getAll(`articles?saved=true&sort=${sort}`).then(setFeed).then(updateLoading)
-		} else if (location.pathname === `/feed/favorites&sort=${sort}`) {
+			ApiManager.getAll(`articles?custom=true&sort=${sort}&relevant=${sort}`).then(setFeed).then(updateLoading)
+		} else if (location.pathname === `/feed/saved&sort=${sort}&relevant=${sort}`) {
+			ApiManager.getAll(`articles?saved=true&sort=${sort}&relevant=${sort}`).then(setFeed).then(updateLoading)
+		} else if (location.pathname === `/feed/favorites&sort=${sort}&relevant=${sort}`) {
 			ApiManager.getAll(`articles?favorites=true`).then(setFeed).then(updateLoading)
 		} else {
-			ApiManager.getAll(`articles?sort=${sort}`).then(setFeed).then(updateLoading);
+			ApiManager.getAll(`articles?sort=${sort}&relevant=${sort}`).then(setFeed).then(updateLoading);
 		}
 	};
 
