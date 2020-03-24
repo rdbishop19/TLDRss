@@ -20,6 +20,7 @@ export default function Home() {
 	const parsed = parse(location.search);
 
 	const [ searchTerm, setSearchTerm ] = useState(null);
+	const [ sort, setSort ] = useState(false)
 
 	const [ feed, setFeed ] = useState({
 		previous: null,
@@ -38,19 +39,19 @@ export default function Home() {
 	const getFeed = () => {
 		updateLoading();
 		if (params.feedId) {
-			ApiManager.getAll(`articles?feed=${params.feedId}`).then(setFeed).then(updateLoading);
+			ApiManager.getAll(`articles?feed=${params.feedId}&sort=${sort}`).then(setFeed).then(updateLoading);
 		} else if (location.search) {
-			ApiManager.getAll(`articles?search=${parsed.filter}`).then(setFeed).then(updateLoading);
+			ApiManager.getAll(`articles?search=${parsed.filter}&sort=${sort}`).then(setFeed).then(updateLoading);
 		} else if (location.pathname === '/coronavirus') {
-			ApiManager.getAll('articles?coronavirus=true').then(setFeed).then(updateLoading);
+			ApiManager.getAll(`articles?coronavirus=true&sort=${sort}`).then(setFeed).then(updateLoading);
 		} else if (location.pathname === '/feed/custom') {
-			ApiManager.getAll('articles?custom=true').then(setFeed).then(updateLoading)
-		} else if (location.pathname === '/feed/saved') {
-			ApiManager.getAll('articles?saved=true').then(setFeed).then(updateLoading)
-		} else if (location.pathname === '/feed/favorites') {
-			ApiManager.getAll('articles?favorites=true').then(setFeed).then(updateLoading)
+			ApiManager.getAll(`articles?custom=true&sort=${sort}`).then(setFeed).then(updateLoading)
+		} else if (location.pathname === `/feed/saved&sort=${sort}`) {
+			ApiManager.getAll(`articles?saved=true&sort=${sort}`).then(setFeed).then(updateLoading)
+		} else if (location.pathname === `/feed/favorites&sort=${sort}`) {
+			ApiManager.getAll(`articles?favorites=true`).then(setFeed).then(updateLoading)
 		} else {
-			ApiManager.getAll('articles').then(setFeed).then(updateLoading);
+			ApiManager.getAll(`articles&sort=${sort}`).then(setFeed).then(updateLoading);
 		}
 	};
 
@@ -130,12 +131,12 @@ export default function Home() {
 
 	useEffect(
 		() => {
-			// console.log('useEffect')
+			console.log('useEffect')
 			setSearchTerm(parsed.filter);
 			getFeed();
 			getPrevArticle();
 		},
-		[ parsed.filter ]
+		[ parsed.filter, sort ]
 	);
 
 	return (
@@ -167,6 +168,7 @@ export default function Home() {
 						</button> : <Link style={{color:"orange"}} to={{pathname:"/login", state:{feedId: feed.results[0].feed.id }}}>Login to subscribe to feed sources</Link>}
 					</span>
 				)}
+				<span title={sort === false ? "Change to Top" : "Change to Newest"} className="button-container sort">Sorted by: <button onClick={()=> setSort(prevState => !prevState)}>{sort ? "Top" : "Newest"}</button></span>
 				<br />
 			</div>
 			<span>{feed.results.length > 0 && `(${feed.count} articles)`}</span>
