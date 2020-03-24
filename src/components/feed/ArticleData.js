@@ -24,6 +24,7 @@ export default function ArticleData({ article, methods, isMainView, isLoggedIn }
 				</Link>)
 			</span>
 			<div className="article-extras">
+				<span>{article.upvote_count} vote(s)</span>{" | "}
 				<span className="timestamp">{article.pub_date ? moment(article.pub_date).fromNow() : 'some time ago'}</span>{" | "}
 				{isMainView && <><span className="fake-link" title="view tl;drs" onClick={()=>methods.getSummaries(article.id)}>TL;DR</span>{" | "}</>}
 				{(isMainView && isLoggedIn) && (

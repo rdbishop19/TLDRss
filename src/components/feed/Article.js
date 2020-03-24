@@ -8,7 +8,7 @@ export default function Article({ article, number, methods, isMainView, isLogged
 			<td className="number">
 				<span >{number}.</span>
 			</td>
-            <td title="upvote" className="upvote-link" style={{ verticalAlign: "top"}}>
+            <td onClick={()=>methods.upvoteArticle(article.id)} title="upvote" className="upvote-link" style={{ verticalAlign: "top"}}>
                 <div className="arrow-up"></div>
             </td>
 			<td>

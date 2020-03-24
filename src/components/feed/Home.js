@@ -47,6 +47,8 @@ export default function Home() {
 			ApiManager.getAll('articles?custom=true').then(setFeed).then(updateLoading)
 		} else if (location.pathname === '/feed/saved') {
 			ApiManager.getAll('articles?saved=true').then(setFeed).then(updateLoading)
+		} else if (location.pathname === '/feed/favorites') {
+			ApiManager.getAll('articles?favorites=true').then(setFeed).then(updateLoading)
 		} else {
 			ApiManager.getAll('articles').then(setFeed).then(updateLoading);
 		}
@@ -116,6 +118,11 @@ export default function Home() {
 		ApiManager.delete(url).then(getFeed)
 	}
 
+	const upvoteArticle = id => {
+		console.log('^^^vote')
+		ApiManager.post('articleupvotes', {article_id: id}).then(console.log)
+	}
+
 	const deleteSummary = url => {
 		ApiManager.delete(url).then(() => getSummaries(selectedArticle))
 	}
@@ -167,7 +174,7 @@ export default function Home() {
 			<div className="full">
 				<div className="left">   
 					{feed.results.length ? (
-						<FeedContainer feed={feed} methods={{ getSummaries, saveArticle, deleteSavedArticle }} />
+						<FeedContainer feed={feed} methods={{ getSummaries, saveArticle, deleteSavedArticle, upvoteArticle }} />
 					) : ( loading ? 
 						<React.Fragment>
 							<div className="lds-hourglass" />
