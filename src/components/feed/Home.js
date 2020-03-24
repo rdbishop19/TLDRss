@@ -119,7 +119,6 @@ export default function Home() {
 	}
 
 	const upvoteArticle = id => {
-		console.log('^^^vote')
 		ApiManager.post('articleupvotes', {article_id: id}).then(console.log)
 	}
 
