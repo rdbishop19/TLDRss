@@ -168,7 +168,10 @@ export default function Home() {
 						</button> : <Link style={{color:"orange"}} to={{pathname:"/login", state:{feedId: feed.results[0].feed.id }}}>Login to subscribe to feed sources</Link>}
 					</span>
 				)}
-				<span title={sort === false ? "Change to Top" : "Change to Newest"} className="button-container sort">Sorted by: <button onClick={()=> setSort(prevState => !prevState)}>{sort ? "Top" : "Newest"}</button></span>
+				<span className="button-container sort">Sort by: 
+					<button className={sort ? "sort-selected" : "sort-unselected"} onClick={() => setSort(true)}>Top</button>
+					<button className={sort ? "sort-unselected" : "sort-selected"} onClick={() => setSort(false)}>Newest</button>
+				</span>
 				<br />
 			</div>
 			<span>{feed.results.length > 0 && `(${feed.count} articles)`}</span>
