@@ -20,7 +20,7 @@ export default function Home() {
 	const parsed = parse(location.search);
 
 	const [ searchTerm, setSearchTerm ] = useState(null);
-	const [ sort, setSort ] = useState(false)
+	const [ sort, setSort ] = useState(true)
 
 	const [ feed, setFeed ] = useState({
 		previous: null,
