@@ -49,7 +49,7 @@ export default function Home() {
 		console.log('params', params_list)
 
 		if (params.feedId) {
-			ApiManager.getAll(`articles?${params_list}`).then(setFeed).then(updateLoading);
+			ApiManager.getAll(`articles?feed=${params.feedId}&${params_list}`).then(setFeed).then(updateLoading);
 		} else if (location.pathname === '/coronavirus') {
 			ApiManager.getAll(`articles?coronavirus=true&${params_list}`).then(setFeed).then(updateLoading);
 		} else if (location.pathname === '/feed/custom') {
