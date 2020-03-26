@@ -70,20 +70,21 @@
 
 .upvote-link {
 	padding-right: 5px;
+	padding-left: 5px;
 }
 
 .upvote-link:hover {
     cursor: pointer;
-    transform: translate(0px, -3px);
+	transform: translate(0px, -3px);
 }
 
 .upvote-link:hover .arrow-up {
-    padding-top: 7px;
+	/* padding-top: 7px; */
 	width: 0;
 	height: 0;
 	border-left: 4px solid transparent;
 	border-right: 4px solid transparent;
-	border-bottom: 6px solid green;
+	border-bottom: 6px solid rgb(0, 167, 0);
 }
 
 .tldr-link {
@@ -103,4 +104,15 @@
 
 .tldr-link:hover .show-me {
     visibility: visible;
+	transform: translate(-1px);
+}
+
+.upvote-link:hover .show-me {
+	visibility: visible;
+	margin: 0px;
+	padding: 0px;
+}
+
+.upvote-link:hover .show-me {
+	transform: translate(0px, 1px);
 }

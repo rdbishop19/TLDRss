@@ -10,6 +10,7 @@ export default function Article({ article, number, methods, isMainView, isLogged
 			</td>
             <td onClick={()=>methods.upvoteArticle(article.id, index)} title="upvote" className="upvote-link" style={{ verticalAlign: "top"}}>
                 <div className="arrow-up"></div>
+				<div className="arrow-up show-me"></div>
             </td>
 			<td>
 			    <ArticleData article={article} methods={methods} isMainView={isMainView} isLoggedIn={isLoggedIn}/>
