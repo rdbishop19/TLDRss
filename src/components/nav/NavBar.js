@@ -36,13 +36,13 @@ function NavBar() {
             <div className="nav-container">
                 <ul className="nav-list">
                     <li className="nav-list-item logo"><span>TL;D<span className="logo-rss">Rss</span></span></li>
-                    <li className="nav-list-item"><NavLink activeClassName="active-link" to='/' exact>home</NavLink></li>
+                    <li className="nav-list-item"><NavLink activeClassName="active-link" to='/feed' exact>home</NavLink></li>
                     {isAuthenticated() ?
                         <> 
                             <li className="nav-list-item"><NavLink activeClassName="active-link" to='/feed/custom'>my feed</NavLink></li>
                             <li className="nav-list-item"><NavLink activeClassName="active-link" to='/feed/saved'>saved</NavLink></li>
                             <li className="nav-list-item"><NavLink activeClassName="active-link" to='/feed/favorites'>favorites</NavLink></li>
-                            <li className="nav-list-item"><NavLink activeClassName="active-link" to='/tldr'>tldr</NavLink></li>
+                            <li className="nav-list-item"><NavLink activeClassName="active-link" to='/feed/mysummaries'>posts</NavLink></li>
                             <li className="nav-list-item float-right logout"><NavLink to='/login' className="account" onClick={handleLogout}>logout</NavLink></li>
                             <li className="nav-list-item float-right username">{user && user.username}</li>
                         </>
