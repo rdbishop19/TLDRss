@@ -46,7 +46,6 @@ export default function Home() {
 		const relevant_param = `relevant=${sort}&`
 
 		const params_list = sort_param + relevant_param + search_param
-		console.log('params', params_list)
 
 		if (params.feedId) {
 			ApiManager.getAll(`articles?feed=${params.feedId}&${params_list}`).then(setFeed).then(updateLoading);
@@ -152,7 +151,7 @@ export default function Home() {
 
 	useEffect(
 		() => {
-			console.log('useEffect')
+			// console.log('useEffect')
 			setSearchTerm(parsed.filter);
 			getFeed();
 			getPrevArticle();
