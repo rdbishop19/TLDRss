@@ -46,7 +46,7 @@ export default function Home() {
 			ApiManager.getAll(`articles?coronavirus=true&sort=${sort}&relevant=${sort}`).then(setFeed).then(updateLoading);
 		} else if (location.pathname === '/feed/custom') {
 			ApiManager.getAll(`articles?custom=true&sort=${sort}&relevant=${sort}`).then(setFeed).then(updateLoading)
-		} else if (location.pathname === `/feed/saved&sort=${sort}&relevant=${sort}`) {
+		} else if (location.pathname === `/feed/saved`) {
 			ApiManager.getAll(`articles?saved=true&sort=${sort}&relevant=${sort}`).then(setFeed).then(updateLoading)
 		} else if (location.pathname === `/feed/favorites&sort=${sort}&relevant=${sort}`) {
 			ApiManager.getAll(`articles?favorites=true`).then(setFeed).then(updateLoading)
