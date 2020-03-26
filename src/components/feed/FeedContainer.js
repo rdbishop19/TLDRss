@@ -11,6 +11,7 @@ export default function FeedContainer({ feed, methods }) {
 					return (
 						<Article
 							key={index}
+							index={index}
 							article={article}
 							number={(feed.page-1)*25+(index + 1)}
 							methods={methods}
