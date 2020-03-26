@@ -3,7 +3,6 @@ import { NavLink, useHistory, useLocation } from 'react-router-dom'
 import { logout, isAuthenticated } from '../auth/simpleAuth'
 import './Nav.css'
 import { withRouter } from 'react-router-dom';
-import ApiManager from '../../modules/ApiManager';
 
 function NavBar() {
     
@@ -21,8 +20,13 @@ function NavBar() {
     }
     const handleSubmit = evt => {
         evt.preventDefault()
-        // console.log('search', searchText)
-        history.push({pathname:'/feed', search: `filter=${searchText}`})
+        // used when user enters search item from login or register views
+        if (location.pathname === "/login" || location.pathname === "/register"){
+            history.push({pathname:'/feed', search: `filter=${searchText}`})
+        } else {
+            // keep the user on the current view 
+            history.push({pathname: location.pathname, search: `filter=${searchText}`})
+        }
     }
     const handleLogout = () => {
         if (window.confirm("Are you sure you want to logout?")){

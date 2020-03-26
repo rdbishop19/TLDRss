@@ -36,24 +36,32 @@ export default function Home() {
 	const [ isEditing, setIsEditing ] = useState(false)
 
 	const updateLoading = () => setLoading((prevState) => !prevState);
+
 	const getFeed = () => {
+
 		updateLoading();
+
+		const search_param = location.search ? `search=${parsed.filter}&` : ""
+		const sort_param = `sort=${sort}&`
+		const relevant_param = `relevant=${sort}&`
+
+		const params_list = sort_param + relevant_param + search_param
+		console.log('params', params_list)
+
 		if (params.feedId) {
-			ApiManager.getAll(`articles?feed=${params.feedId}&sort=${sort}&relevant=${sort}`).then(setFeed).then(updateLoading);
-		} else if (location.search) {
-			ApiManager.getAll(`articles?search=${parsed.filter}&sort=${sort}&relevant=${sort}`).then(setFeed).then(updateLoading);
+			ApiManager.getAll(`articles?${params_list}`).then(setFeed).then(updateLoading);
 		} else if (location.pathname === '/coronavirus') {
-			ApiManager.getAll(`articles?coronavirus=true&sort=${sort}&relevant=${sort}`).then(setFeed).then(updateLoading);
+			ApiManager.getAll(`articles?coronavirus=true&${params_list}`).then(setFeed).then(updateLoading);
 		} else if (location.pathname === '/feed/custom') {
-			ApiManager.getAll(`articles?custom=true&sort=${sort}&relevant=${sort}`).then(setFeed).then(updateLoading)
+			ApiManager.getAll(`articles?custom=true&${params_list}`).then(setFeed).then(updateLoading);
 		} else if (location.pathname === `/feed/saved`) {
-			ApiManager.getAll(`articles?saved=true&sort=${sort}&relevant=${sort}`).then(setFeed).then(updateLoading)
+			ApiManager.getAll(`articles?saved=true&${params_list}`).then(setFeed).then(updateLoading);
 		} else if (location.pathname === `/feed/favorites`) {
-			ApiManager.getAll(`articles?favorites=true&sort=${sort}&relevant=${sort}`).then(setFeed).then(updateLoading)
+			ApiManager.getAll(`articles?favorites=true&${params_list}`).then(setFeed).then(updateLoading);
 		} else if (location.pathname === `/feed/mysummaries`) {
-			ApiManager.getAll(`articles?usersummaries=true&sort=${sort}&relevant=${sort}`).then(setFeed).then(updateLoading)
+			ApiManager.getAll(`articles?usersummaries=true&${params_list}`).then(setFeed).then(updateLoading);
 		} else {
-			ApiManager.getAll(`articles?sort=${sort}&relevant=${sort}`).then(setFeed).then(updateLoading);
+			ApiManager.getAll(`articles?${params_list}`).then(setFeed).then(updateLoading);
 		}
 	};
 
