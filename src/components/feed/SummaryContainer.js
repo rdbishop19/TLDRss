@@ -9,7 +9,7 @@ import './ArticleLoad.css';
 import SummaryList from './SummaryList';
 
 export default function SummaryContainer({ summaries, userSummary, selected, methods, status }) {
-	const [ loading, setLoading ] = useState(false)
+	const [ loading, setLoading ] = useState(false);
 	const [ article, setArticle ] = useState({
 		link: '',
 		feed: {
@@ -20,37 +20,44 @@ export default function SummaryContainer({ summaries, userSummary, selected, met
 		title: ''
 	});
 	const getArticleInfo = () => {
-		setLoading(true)
-		ApiManager.get('articles', selected)
-			.then(res => {
-				setArticle(res)
-				setLoading(prevState => !prevState)
-			});
+		setLoading(true);
+		ApiManager.get('articles', selected).then((res) => {
+			setArticle(res);
+			setLoading((prevState) => !prevState);
+		});
 	};
 	useEffect(getArticleInfo, [ selected ]);
 	return (
 		<React.Fragment>
-			{loading ? <span className="lds-dual-ring">loading...</span> :
-			<React.Fragment>
-				<ArticleData article={article} isLoggedIn={isAuthenticated()} methods={methods}/>
-				<br/>
-				{isAuthenticated() ? (userSummary && !status) ? (
-					<React.Fragment>
-						<p className="section-header">Your TL;DR</p>
-						<UserSummary isCurrentUser={true} userSummary={userSummary} methods={methods} />
-					</React.Fragment>
-				) : (
-					<NewSummaryForm selected={selected} methods={methods} status={status} userSummary={userSummary}/>
-				) : (
-					<Link
-						style={{ color: 'orange', fontWeight: 'bolder' }}
-						to={{ pathname: '/login', state: { articleId: selected } }}
-					>
-						Login to add a summary
-					</Link>
-				)}
-				<SummaryList summaries={summaries} />
-			</React.Fragment>}
+			{loading ? (
+				<span className="lds-dual-ring article-box">loading...</span>
+			) : (
+				<div className="article-box">
+					<ArticleData article={article} isLoggedIn={isAuthenticated()} methods={methods} />
+					<br />
+					{isAuthenticated() ? userSummary && !status ? (
+						<React.Fragment>
+							<p className="section-header">Your TL;DR</p>
+							<UserSummary isCurrentUser={true} userSummary={userSummary} methods={methods} />
+						</React.Fragment>
+					) : (
+						<NewSummaryForm
+							selected={selected}
+							methods={methods}
+							status={status}
+							userSummary={userSummary}
+						/>
+					) : (
+						<Link
+							style={{ color: 'orange', fontWeight: 'bolder' }}
+							to={{ pathname: '/login', state: { articleId: selected } }}
+						>
+							Login to add a summary
+						</Link>
+					)}
+				</div>
+			)}
+			<SummaryList summaries={summaries} />
 		</React.Fragment>
 	);
 }
