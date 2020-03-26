@@ -29,3 +29,17 @@ h2 {
 .subscribe {
 	margin-left: 100px;
 }
+
+.sort {
+	margin-left: 200px;
+}
+
+.sort-selected {
+	font-weight: 900;
+	text-shadow: 0 0 0.5px rgb(0, 0, 0);
+	background-color: rgba(172, 255, 47, 0.534);
+}
+
+.sort-unselected {
+	color: none;
+}
