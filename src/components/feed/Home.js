@@ -119,8 +119,19 @@ export default function Home() {
 		ApiManager.delete(url).then(getFeed)
 	}
 
-	const upvoteArticle = id => {
-		ApiManager.post('articleupvotes', {article_id: id}).then(console.log)
+	const upvoteArticle = (id, idx) => {
+		// post new upvote to db
+		ApiManager.post('articleupvotes', {article_id: id})
+			.then(res => {
+				// if successful, shallow update state without doing another full fetch
+				if (res.url){
+					// map through results array to find the indexed article and +1 to the upvotes
+					let newFeed = feed.results.map((article, index) => idx === index ? {...article, upvote_count: (article.upvote_count + 1) } : article)
+					// destructure and reset state
+					setFeed({...feed, results: newFeed})
+				}
+			}
+		)
 	}
 
 	const deleteSummary = url => {
