@@ -1,5 +1,6 @@
 import React from 'react';
 import UserSummary from './UserSummary';
+import ExtrasContainer from './ExtrasContainer';
 
 export default function SummaryList({ summaries }) {
 	return (
@@ -20,13 +21,9 @@ export default function SummaryList({ summaries }) {
 						<p>3. <span title="Keep It Super Simple :)">K.I.S.S.</span></p>
 						<p>4. That's TL;DRss</p>
 					</div>
-					<div className="easter-egg">
-						<a rel="noopener noreferrer" target="_blank" href="https://github.com/rdbishop19/TLDRss">
-							Suggestions?
-						</a>
-					</div>
 				</React.Fragment>
 			)}
+			<ExtrasContainer />
 		</React.Fragment>
 	);
 }
