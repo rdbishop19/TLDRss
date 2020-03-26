@@ -50,6 +50,8 @@ export default function Home() {
 			ApiManager.getAll(`articles?saved=true&sort=${sort}&relevant=${sort}`).then(setFeed).then(updateLoading)
 		} else if (location.pathname === `/feed/favorites`) {
 			ApiManager.getAll(`articles?favorites=true&sort=${sort}&relevant=${sort}`).then(setFeed).then(updateLoading)
+		} else if (location.pathname === `/feed/mysummaries`) {
+			ApiManager.getAll(`articles?usersummaries=true&sort=${sort}&relevant=${sort}`).then(setFeed).then(updateLoading)
 		} else {
 			ApiManager.getAll(`articles?sort=${sort}&relevant=${sort}`).then(setFeed).then(updateLoading);
 		}
