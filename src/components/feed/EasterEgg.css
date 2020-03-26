@@ -1,0 +1,34 @@
+.easter-egg {
+    text-align: center;
+    font-size: xx-small;
+    margin-top: 25px;
+    box-shadow: 0 0 12px 3px black, 0 0 12px 3px black,0 0 12px 3px black, 0 0 12px 3px black;
+}
+
+pre {
+    background-color: rgba(82, 1, 82, 0.1);
+    color: rgb(0, 172, 0);
+    text-shadow: 0 0 6px #C8C8C8;
+    background-image: radial-gradient(rgba(82, 1, 82, 0.75), black 90%);
+    display: block;
+    font-family: monospace;
+    white-space: pre;
+    padding: 3px;
+    margin: 0 auto;
+}
+
+.easter-egg a {
+    color: white;
+    font-family: monospace;
+    text-decoration: underline;
+    margin: 0 auto;
+}
+
+.ascii-name {
+    color: rgb(206, 255, 206);
+}
+
+.suggestions {
+    margin: 0 auto;
+    text-align: center;
+}

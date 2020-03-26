@@ -58,14 +58,3 @@ textarea {
 .instructions p:nth-child(6) span {
     cursor: crosshair;
 }
-
-.easter-egg {
-    text-align: center;
-    margin-top: 200px;
-}
-
-.easter-egg a {
-    color: purple;
-    font-weight: 900;
-    font-size: 16pt;
-}
