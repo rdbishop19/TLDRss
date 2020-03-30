@@ -38,7 +38,7 @@ export default function SummaryContainer({ summaries, userSummary, selected, met
 					{isAuthenticated() ? userSummary && !status ? (
 						<React.Fragment>
 							<p className="section-header">Your TL;DR</p>
-							<UserSummary isCurrentUser={true} userSummary={userSummary} methods={methods} />
+							<table><tbody><UserSummary isCurrentUser={true} userSummary={userSummary} /></tbody></table>
 						</React.Fragment>
 					) : (
 						<NewSummaryForm
@@ -57,7 +57,7 @@ export default function SummaryContainer({ summaries, userSummary, selected, met
 					)}
 				</div>
 			)}
-			<SummaryList summaries={summaries} />
+			<SummaryList summaries={summaries} methods={methods} />
 		</React.Fragment>
 	);
 }
