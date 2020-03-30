@@ -2,12 +2,16 @@ import React from 'react';
 import UserSummary from './UserSummary';
 import ExtrasContainer from './ExtrasContainer';
 
-export default function SummaryList({ summaries }) {
+export default function SummaryList({ summaries, methods }) {
 	return (
 		<React.Fragment>
 			<p className="section-header">Community TL;DRs</p>
 			{summaries.results.length > 0 ? (
-				summaries.results.map((summary, index) => <UserSummary key={index} userSummary={summary} />)
+				<table cellSpacing="0" cellPadding="0">
+					<tbody>
+						{summaries.results.map((summary, index) => <UserSummary key={index} index={index} methods={methods} userSummary={summary} listView={true} />)}
+					</tbody>
+				</table>
 			) : (
 				<React.Fragment>
 					<div className="instructions">

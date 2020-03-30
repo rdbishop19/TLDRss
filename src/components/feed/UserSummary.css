@@ -4,6 +4,20 @@
     /* font-size: medium; */
 }
 
+.btn-summary {
+    float: right;
+}
+
+.summary-extras {
+	margin: 0px;
+	color: grey;
+	font-size: smaller;
+}
+
+.spacer {
+    height: 5px;
+}
+
 .timestamp {
     margin-left: 5px;
     font-size: small;

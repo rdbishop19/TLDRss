@@ -143,6 +143,19 @@ export default function Home() {
 		)
 	}
 
+	const upvoteSummary = (id, idx) => {
+		// post new summary to db
+		ApiManager.post('summaryupvotes', {summary_id: id})
+			.then(res => {
+				if (res.url){
+					// map through results array to find current index
+					let summaryList = summaries.results.map((summary, index) => idx === index ? {...summary, upvote_count: (summary.upvote_count + 1) } : summary)
+					// destructure and reset state
+					setSummaries({...summaries, results: summaryList})
+				}
+			})
+	}
+
 	const deleteSummary = url => {
 		ApiManager.delete(url).then(() => getSummaries(selectedArticle))
 	}
@@ -214,7 +227,7 @@ export default function Home() {
 							userSummary={userSummary}
 							selected={selectedArticle}
 							status={isEditing}
-							methods={{ postNewSummary, deleteSummary, openEditDialog, patchSummary, saveArticle }}
+							methods={{ postNewSummary, deleteSummary, openEditDialog, patchSummary, saveArticle, upvoteSummary }}
 						/>
 					)}
 				</div>
