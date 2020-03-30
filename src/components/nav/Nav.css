@@ -94,5 +94,14 @@ a {
 
 .account { 
 	color: rgb(255, 98, 255);
+	font-family: 'Courier New', Courier, monospace;
 	font-weight: bolder;
+	background: none;
+	border: none;
+	font-size: medium;
+	cursor: pointer;
+}
+
+.account:hover {
+	text-decoration: underline;
 }

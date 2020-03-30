@@ -3,6 +3,9 @@ import ReactDOM from 'react-dom';
 import App from './components/App';
 import { BrowserRouter as Router } from 'react-router-dom'
 import * as serviceWorker from './serviceWorker';
+import welcome from './extras/welcome.js'
+
+welcome()
 
 ReactDOM.render(
     <Router>

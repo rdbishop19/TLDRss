@@ -1,10 +1,14 @@
 import React from 'react'
-import { Route, Redirect } from 'react-router-dom'
+import { Route, Redirect, useHistory } from 'react-router-dom'
 import Home from './feed/Home'
 import Register from './auth/Register'
 import Login from './auth/Login'
+import { isAuthenticated } from './auth/simpleAuth'
 
 export default function ApplicationViews() {
+    
+    const history = useHistory()
+
     return (
         <React.Fragment>
             {/* HOME VIEW */}
@@ -25,8 +29,8 @@ export default function ApplicationViews() {
             <Route path="/tldr/favorites" render={props => <p>TLDR FAVORITE LIST</p>} />
             <Route path="/tldr/followed" render={props => <p>TLDR FOLLOWED USERS</p>} />
 
-            <Route path="/login" component={Login} />
-            <Route path='/register' component={Register} />
+            <Route path="/login" render={()=> isAuthenticated() ? history.goBack() : <Login />} />
+            <Route path='/register' render={()=> isAuthenticated() ? history.goBack() : <Register />} />
 
         </React.Fragment>
     )
