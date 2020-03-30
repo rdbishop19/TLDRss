@@ -31,8 +31,8 @@ function NavBar() {
     const handleLogout = () => {
         if (window.confirm("Are you sure you want to logout?")){
                 logout()
+                history.push('/')
             }
-        // history.push('/login')
     }
 
     return (
@@ -47,7 +47,7 @@ function NavBar() {
                             <li className="nav-list-item"><NavLink activeClassName="active-link" to='/feed/saved'>saved</NavLink></li>
                             <li className="nav-list-item"><NavLink activeClassName="active-link" to='/feed/favorites'>favorites</NavLink></li>
                             <li className="nav-list-item"><NavLink activeClassName="active-link" to='/feed/mysummaries'>posts</NavLink></li>
-                            <li className="nav-list-item float-right logout"><NavLink to='/login' className="account" onClick={handleLogout}>logout</NavLink></li>
+                            <li className="nav-list-item float-right logout"><button className="account" onClick={handleLogout}>logout</button></li>
                             <li className="nav-list-item float-right username">{user && user.username}</li>
                         </>
                             :
