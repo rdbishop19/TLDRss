@@ -1,0 +1,32 @@
+.article-box {
+	height: 300px;
+}
+
+.lds-dual-ring {
+	display: inline-block;
+	font-size: 10pt;
+	text-align: center;
+	width: 100%;
+	/* height: 255px; */
+}
+.lds-dual-ring:before {
+	clear: left;
+	content: " ";
+	display: block;
+	width: 40px;
+	height: 40px;
+	margin: 0 auto;
+	justify-content: center;
+	border-radius: 50%;
+	border: 6px solid #fff;
+	border-color: #3333333d transparent #3333333d transparent;
+	animation: lds-dual-ring 1.2s linear infinite;
+}
+@keyframes lds-dual-ring {
+	0% {
+		transform: rotate(0deg);
+	}
+	100% {
+		transform: rotate(360deg);
+	}
+}

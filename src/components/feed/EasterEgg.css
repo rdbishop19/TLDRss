@@ -1,0 +1,51 @@
+.easter-egg {
+    margin: 0 auto;
+    text-align: center;
+    font-size: 0.4pc;
+    width: 250px;
+    margin-top: 40px;
+    overflow: hidden;
+    box-shadow: 0 0 12px 3px black, 0 0 12px 3px black,0 0 12px 3px black, 0 0 12px 3px black;
+}
+
+@media only screen and (max-width: 750px) and (min-width: 300px) {
+	.easter-egg {
+        font-size: 0.5pc;
+        width: 200px;
+	}
+}
+@media only screen and (max-width: 2000px) and (min-width: 900px) {
+	.easter-egg {
+        font-size: 0.5pc;
+        width: 400px;
+	}
+}
+
+pre {
+    background-color: rgba(82, 1, 82, 0.1);
+    color: rgb(0, 172, 0);
+    text-shadow: 0 0 6px #C8C8C8;
+    background-image: radial-gradient(rgba(82, 1, 82, 0.75), black 90%);
+    display: block;
+    font-family: monospace;
+    white-space: pre;
+    padding: 3px;
+    margin: 0 auto;
+}
+
+.easter-egg a {
+    font-size: 10pt;
+    color: white;
+    font-family: monospace;
+    text-decoration: underline;
+    margin: 0 auto;
+}
+
+.ascii-name {
+    color: rgb(206, 255, 206);
+}
+
+.suggestions {
+    margin: 0 auto;
+    text-align: center;
+}

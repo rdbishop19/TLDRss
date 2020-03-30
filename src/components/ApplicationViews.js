@@ -1,30 +1,36 @@
 import React from 'react'
-import { Route } from 'react-router-dom'
+import { Route, Redirect, useHistory } from 'react-router-dom'
 import Home from './feed/Home'
 import Register from './auth/Register'
 import Login from './auth/Login'
+import { isAuthenticated } from './auth/simpleAuth'
 
 export default function ApplicationViews() {
+    
+    const history = useHistory()
+
     return (
         <React.Fragment>
             {/* HOME VIEW */}
-            <Route exact path="/" component={Home} />
+            <Route exact path="/" render={()=><Redirect to="/feed" />} />
             {/* <Route path="/feed" component={Home} /> */}
             {/* <Route path="/feed/article/:articleId(\d+)" component={Home} /> */}
+            <Route path="/coronavirus" component={Home} />
+            <Route exact path="/feed" component={Home} />
 
             {/* FEED ROUTES */}
-            <Route path="/feed/:feedId(\d+)" render={props => <p>SINGLE FEED</p>} />
-            <Route path="/feed/custom" render={props => <p>MY FEED</p>} />
-            <Route path="/feed/saved" render={props => <p>SAVED ITEMS</p>} />
-            <Route path="/feed/favorites" render={props => <p>FAVORITES</p>} />
+            <Route path="/feed/source/:feedId(\d+)" component={Home} />
+            <Route path="/feed/custom" component={Home} />
+            <Route path="/feed/saved" component={Home} />
+            <Route path="/feed/favorites" component={Home} />
+            <Route path="/feed/mysummaries" component={Home} />
 
             {/* SUMMARY ROUTES */}
-            <Route exact path="/tldr" render={props => <p>USER TLDR SUMMARY LIST</p>} />
             <Route path="/tldr/favorites" render={props => <p>TLDR FAVORITE LIST</p>} />
             <Route path="/tldr/followed" render={props => <p>TLDR FOLLOWED USERS</p>} />
 
-            <Route path="/login" component={Login} />
-            <Route path='/register' component={Register} />
+            <Route path="/login" render={()=> isAuthenticated() ? history.goBack() : <Login />} />
+            <Route path='/register' render={()=> isAuthenticated() ? history.goBack() : <Register />} />
 
         </React.Fragment>
     )

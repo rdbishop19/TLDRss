@@ -1,11 +1,74 @@
 .user-summary {
-    border: 2px solid grey;
+    border: 1px dotted grey;
     padding: 5px;
+    /* font-size: medium; */
+}
+
+.btn-summary {
+    float: right;
+}
+
+.summary-extras {
+	margin: 0px;
+	color: grey;
+	font-size: smaller;
+}
+
+.spacer {
+    height: 5px;
+}
+
+.timestamp {
+    margin-left: 5px;
     font-size: small;
+    color: grey;
 }
 
 .username {
     padding-right: 5px;
     font-size: large;
     font-weight: bolder;
+}
+
+textarea {
+    background-color: rgba(172, 255, 47, 0.342);
+    resize: none;
+    overflow: auto;
+}
+
+.tldr-header {
+    font-weight: bolder;
+}
+
+.section-header {
+    font-weight: bolder;
+    font-size: 14pt;
+    text-align: center;
+    margin-bottom: 15px;
+    border-bottom: 2px solid grey;
+}
+
+.instructions {
+    padding: 5px;
+    color: #333;
+    font-weight: bold;
+    background-color: greenyellow;
+}
+
+.instructions p {
+    margin: 5px 2px;
+}
+
+.instructions p:nth-child(2) span {
+    background-color: purple;
+    color: yellow;
+    padding: 2px;
+}
+
+.instructions p:nth-child(3) {
+    text-decoration: underline;
+}
+
+.instructions p:nth-child(6) span {
+    cursor: crosshair;
 }
