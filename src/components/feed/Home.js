@@ -34,6 +34,7 @@ export default function Home() {
 	const [ selectedArticle, setSelectedArticle ] = useState(null);
 	const [ userSummary, setUserSummary ] = useState(null);
 	const [ isEditing, setIsEditing ] = useState(false)
+	const [ summaryIndex, setSummaryIndex ] = useState(0)
 
 	const updateLoading = () => setLoading((prevState) => !prevState);
 
@@ -74,7 +75,7 @@ export default function Home() {
 	const getNewPage = (url) => {
 		if (url != null) {
 			updateLoading();
-			ApiManager.getPage(url).then(setFeed).then(updateLoading);
+			ApiManager.getPage(url).then(setFeed).then(updateLoading).then(()=>setSummaryIndex(0));
 		}
 	};
 
@@ -160,6 +161,9 @@ export default function Home() {
 		ApiManager.delete(url).then(() => getSummaries(selectedArticle))
 	}
 
+	const highlightSelectedArticle = (index) => {
+		setSummaryIndex(index)
+	}
 	useEffect(getPrevArticle, [feed])
 
 	useEffect(
@@ -211,7 +215,7 @@ export default function Home() {
 			<div className="full">
 				<div className="left">   
 					{feed.results.length ? (
-						<FeedContainer feed={feed} methods={{ getSummaries, saveArticle, deleteSavedArticle, upvoteArticle, clickTest }} config={{selectedIndex}} />
+						<FeedContainer feed={feed} methods={{ getSummaries, saveArticle, deleteSavedArticle, upvoteArticle, highlightSelectedArticle }} config={{summaryIndex}} />
 					) : ( loading ? 
 						<React.Fragment>
 							<div className="lds-hourglass" />

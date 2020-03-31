@@ -2,9 +2,23 @@ import React from 'react';
 import './Article.css';
 import ArticleData from './ArticleData';
 
-export default function Article({ article, number, methods, isMainView, isLoggedIn, index }) {
+export default function Article({ article, number, methods, isMainView, isLoggedIn, index, config }) {
+
+	const { summaryIndex } = config
+	
+	const handleSummaryClick = () => {
+		methods.highlightSelectedArticle(index)
+		methods.getSummaries(article.id)
+	}
+
+	const selectedArrowStyle = {
+		visibility: summaryIndex === index ? 'visible' : 'hidden',
+		borderLeftColor: 'orangered'
+		// borderLeftColor: 'rgba(0,170,230,0.9)'
+	}
+
 	return (
-		<tr className="article" onClick={(e)=>methods.clickTest(e, index)}>
+		<tr className={`article ${summaryIndex === index && "selected"}`}>
 			<td className="number">
 				<span >{number}.</span>
 			</td>
@@ -13,11 +27,12 @@ export default function Article({ article, number, methods, isMainView, isLogged
 				<div className="arrow-up show-me"></div>
             </td>
 			<td>
-			    <ArticleData article={article} methods={methods} isMainView={isMainView} isLoggedIn={isLoggedIn}/>
+			    <ArticleData article={article} methods={{...methods, handleSummaryClick}} isMainView={isMainView} isLoggedIn={isLoggedIn}/>
 			</td>
-            <td title="view tl;drs" onClick={()=>methods.getSummaries(article.id)} className="tldr-link">
+            <td title="view tl;drs" onClick={handleSummaryClick} className="tldr-link">
+                <div className="arrow-right show-me" style={selectedArrowStyle}></div>
+                <div className="arrow-right" style={selectedArrowStyle}></div>
                 <div className="arrow-right show-me"></div>
-                <div className="arrow-right"></div>
             </td>
 		</tr>
 	);

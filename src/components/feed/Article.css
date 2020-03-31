@@ -17,6 +17,10 @@
 	font-size: smaller;
 }
 
+.selected {
+	background-color: rgba(234, 255, 47, 0.212);
+}
+
 .fake-link {
 	/* text-shadow: 0px 0.5px 0.5px #00AAE6; */
 	text-shadow: 0px 0.5px 0.5px rgba(0, 169, 230, 0.205);
@@ -57,7 +61,7 @@
 	height: 0;
 	border-left: 4px solid transparent;
 	border-right: 4px solid transparent;
-	border-bottom: 6px solid black;
+	border-bottom: 6px solid rgb(197, 27, 197);
 }
 
 .arrow-right {
@@ -66,7 +70,7 @@
 	border-top: 6px solid transparent;
 	border-bottom: 6px solid transparent;
 
-	border-left: 6px solid orangered;
+	border-left: 6px solid rgb(0, 0, 0);
 }
 
 .show-me {
@@ -104,12 +108,12 @@
 
 .tldr-link:hover {
     cursor: pointer;
-    transform: translate(3px, 0px);
+    /* transform: translate(3px, 0px); */
 }
 
 .tldr-link:hover .show-me {
     visibility: visible;
-	transform: translate(-1px);
+	/* transform: translate(1px); */
 }
 
 .upvote-link:hover .show-me {
