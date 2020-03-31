@@ -3,11 +3,13 @@
 }
 
 .article-link {
+	font-weight: 600;
 	color: black;
 }
 
 .article-link:hover {
 	text-decoration: underline;
+	text-decoration-color: black;
 	cursor: pointer;
 }
 

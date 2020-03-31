@@ -14,7 +14,7 @@ export default function ArticleData({ article, methods, isMainView, isLoggedIn }
 				target="_blank"
 				title={article.link}
 				className="article-link"
-				style={{ fontWeight: "bold", textDecoration: isMainView ? "none" : "underline"}}
+				style={{ textDecoration: !isMainView && "underline"}}
 			>
 				{article.title}
 			</a>
