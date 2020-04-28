@@ -1,4 +1,5 @@
 import React from 'react'
+import './EllipsisLoader.css'
 
 export default function EllipsisLoader() {
     return (

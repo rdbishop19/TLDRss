@@ -1,17 +1,17 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useEffect } from 'react';
 import ApiManager from '../../modules/ApiManager';
-import Article from './Article';
 import './Home.css';
-import './LoadSymbol.css';
-import './NewPageLoader.css';
 import FeedContainer from './FeedContainer';
 import SummaryContainer from './SummaryContainer';
 import { isAuthenticated } from '../auth/simpleAuth';
-import { useLocation, useParams, Link } from 'react-router-dom';
+import { useLocation, useParams } from 'react-router-dom';
 import { parse } from 'query-string';
-import EllipsisLoader from '../loaders/EllipsisLoader';
+import PageButtons from './PageButtons';
+import FeedActions from './FeedActions';
+import FeedCount from './FeedCount';
 import SpinningLoader from '../loaders/SpinningLoader';
+import NoResultsMessage from './NoResultsMessage';
 
 export default function Home() {
 	const location = useLocation();
@@ -180,38 +180,37 @@ export default function Home() {
 
 	return (
 		<React.Fragment>
-			<div className="feed-nav">
-				<span className="button-container">
-					<button disabled={loading || !feed.previous} onClick={() => getNewPage(feed.previous)}>
-						Prev
-					</button>
-					<button disabled={loading || !feed.next} onClick={() => getNewPage(feed.next)}>
-						Next
-					</button>
-				</span>
-				{feed.results.length && loading ? <EllipsisLoader /> : undefined}
-				{/* <br /> */}
-				{params.feedId &&
-				feed.results.length > 0 && (
-					<span className="button-container subscribe">
-						{isAuthenticated() ? <button onClick={()=>updateFeedSubscription(params.feedId)}>
-							Add {feed.results[0].feed.name} to my feed
-						</button> : <Link style={{color:"orange"}} to={{pathname:"/login", state:{feedId: feed.results[0].feed.id }}}>Login to subscribe to feed sources</Link>}
-					</span>
-				)}
-				<span className="button-container sort">Sort by: 
-					<button className={sort ? "sort-selected" : "sort-unselected"} onClick={() => setSort(true)}>Top</button>
-					<button className={sort ? "sort-unselected" : "sort-selected"} onClick={() => setSort(false)}>Newest</button>
-				</span>
-				<br />
-			</div>
-			<span>{feed.results.length > 0 && `(${feed.count} articles)`}</span>
+			
+			<FeedActions 
+				loading={loading} 
+				feed={feed} 
+				sort={sort} 
+				params={params} 
+				actions={{ setSort, getNewPage, updateFeedSubscription}}
+			/>
+
+			{feed?.results?.length ? <FeedCount count={feed?.count} /> : undefined}
+
 			<div className="full">
 				<div className="left">   
 					{feed.results.length ? (
-						<FeedContainer feed={feed} methods={{ getSummaries, saveArticle, deleteSavedArticle, upvoteArticle, highlightSelectedArticle }} config={{summaryIndex}} />
-					) : ( loading ? 
-						<SpinningLoader /> : <p>No results for "{parsed.filter}"</p>
+						<FeedContainer 
+							feed={feed} 
+							config={{summaryIndex}} 
+							methods={{ 
+								getSummaries, 
+								saveArticle, 
+								deleteSavedArticle, 
+								upvoteArticle, 
+								highlightSelectedArticle 
+							}} 
+						/>
+					) : ( 
+						loading 
+						? 
+						<SpinningLoader /> 
+						: 
+						<NoResultsMessage filter={parsed?.filter} />
 					)}
 				</div>
 				<div className="right">
@@ -221,19 +220,26 @@ export default function Home() {
 							userSummary={userSummary}
 							selected={selectedArticle}
 							status={isEditing}
-							methods={{ postNewSummary, deleteSummary, openEditDialog, patchSummary, saveArticle, upvoteSummary }}
+							methods={{ 
+								postNewSummary, 
+								deleteSummary, 
+								openEditDialog, 
+								patchSummary, 
+								saveArticle, 
+								upvoteSummary 
+							}}
 						/>
 					)}
 				</div>
 			</div>
-			<div className="button-container">
-				<button disabled={loading || !feed.previous} onClick={() => getNewPage(feed.previous)}>
-					Prev
-				</button>
-				<button disabled={loading || !feed.next} onClick={() => getNewPage(feed.next)}>
-					Next
-				</button>
-			</div>
+
+			<PageButtons 
+				loading={loading} 
+				previous={feed.previous} 
+				next={feed.next} 
+				getNewPage={getNewPage} 
+			/>
+
 		</React.Fragment>
 	);
 }

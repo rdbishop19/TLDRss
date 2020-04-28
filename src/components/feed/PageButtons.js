@@ -1,12 +1,13 @@
 import React from 'react';
+import './PageButtons.css'
 
-export default function PageButtons({loading, feed, getNewPage}) {
+export default function PageButtons({ loading, previous, next, getNewPage }) {
 	return (
 		<div className="button-container">
-			<button disabled={loading || !feed.previous} onClick={() => getNewPage(feed.previous)}>
+			<button disabled={loading || !previous} onClick={()=>getNewPage(previous)}>
 				Prev
 			</button>
-			<button disabled={loading || !feed.next} onClick={() => getNewPage(feed.next)}>
+			<button disabled={loading || !next} onClick={()=>getNewPage(next)}>
 				Next
 			</button>
 		</div>

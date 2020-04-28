@@ -1,4 +1,5 @@
 import React from 'react'
+import './SpinningLoader.css'
 
 export default function SpinningLoader() {
     return (
