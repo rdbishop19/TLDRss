@@ -3,36 +3,25 @@ import { NavLink, useHistory, useLocation } from 'react-router-dom'
 import { logout, isAuthenticated } from '../auth/simpleAuth'
 import './Nav.css'
 import { withRouter } from 'react-router-dom';
+import { parse } from 'query-string';
+import Search from './Search';
 
 function NavBar() {
     
     const history = useHistory()
     const location = useLocation()
+    const { pathname, state: routerState } = location
+    const parsed = parse(location.search);
 
     const user = isAuthenticated() ? JSON.parse(sessionStorage.getItem("user")) : null
 
-    const articleId = location.state ? location.state.articleId : null
+    const articleId = routerState ? routerState.articleId : null
     
-    const [searchText, setSearchText ] = useState('')
-
-    const handleChange = evt => {
-        setSearchText(evt.target.value)
-    }
-    const handleSubmit = evt => {
-        evt.preventDefault()
-        // used when user enters search item from login or register views
-        if (location.pathname === "/login" || location.pathname === "/register"){
-            history.push({pathname:'/feed', search: `filter=${searchText}`})
-        } else {
-            // keep the user on the current view 
-            history.push({pathname: location.pathname, search: `filter=${searchText}`})
-        }
-    }
     const handleLogout = () => {
         if (window.confirm("Are you sure you want to logout?")){
-                logout()
-                history.push('/')
-            }
+            logout()
+            history.push('/')
+        }
     }
 
     return (
@@ -56,9 +45,13 @@ function NavBar() {
                             <li className="nav-list-item float-right"><NavLink activeClassName="active-link" className="account" to={{pathname:'/login', state: {articleId: articleId}}}>login</NavLink></li>
                         </>
                     }
-                    <li className="nav-list-item special"><NavLink activeClassName="active-special" className="special" to='/coronavirus'>coronavirus</NavLink></li>
+                    <li className="nav-list-item special">
+                        <NavLink activeClassName="active-special" className="special" to='/coronavirus'>
+                            coronavirus
+                        </NavLink>
+                    </li>
                     <li className="nav-list-item">
-                        <form onSubmit={handleSubmit}><input onChange={handleChange} className="search" placeholder="search" value={searchText}/></form>
+                        <Search />
                     </li>
                 </ul>
             </div>
