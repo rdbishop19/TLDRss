@@ -10,6 +10,8 @@ import SummaryContainer from './SummaryContainer';
 import { isAuthenticated } from '../auth/simpleAuth';
 import { useLocation, useParams, Link } from 'react-router-dom';
 import { parse } from 'query-string';
+import EllipsisLoader from '../loaders/EllipsisLoader';
+import SpinningLoader from '../loaders/SpinningLoader';
 
 export default function Home() {
 	const location = useLocation();
@@ -187,15 +189,7 @@ export default function Home() {
 						Next
 					</button>
 				</span>
-				<span
-					style={{ visibility: feed.results.length && loading ? 'visible' : 'hidden' }}
-					className="lds-ellipsis"
-				>
-					<span />
-					<span />
-					<span />
-					<span />
-				</span>
+				{feed.results.length && loading ? <EllipsisLoader /> : undefined}
 				{/* <br /> */}
 				{params.feedId &&
 				feed.results.length > 0 && (
@@ -217,11 +211,7 @@ export default function Home() {
 					{feed.results.length ? (
 						<FeedContainer feed={feed} methods={{ getSummaries, saveArticle, deleteSavedArticle, upvoteArticle, highlightSelectedArticle }} config={{summaryIndex}} />
 					) : ( loading ? 
-						<React.Fragment>
-							<div className="lds-hourglass" />
-							<div>fetching articles...</div>
-							<br />
-						</React.Fragment> : <p>No results for "{parsed.filter}"</p>
+						<SpinningLoader /> : <p>No results for "{parsed.filter}"</p>
 					)}
 				</div>
 				<div className="right">
