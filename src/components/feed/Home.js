@@ -22,7 +22,7 @@ export default function Home() {
 	const parsed = parse(location.search);
 
 	const [ searchTerm, setSearchTerm ] = useState(null);
-	const [ sort, setSort ] = useState(true)
+	const [ sort, setSort ] = useState(false)
 
 	const [ feed, setFeed ] = useState({
 		previous: null,
@@ -49,18 +49,18 @@ export default function Home() {
 		const relevant_param = `relevant=${sort}&`
 
 		const params_list = sort_param + relevant_param + search_param
-
+		const { pathname } = location
 		if (params.feedId) {
 			ApiManager.getAll(`articles?feed=${params.feedId}&${params_list}`).then(setFeed).then(updateLoading);
-		} else if (location.pathname === '/coronavirus') {
+		} else if (pathname === '/coronavirus') {
 			ApiManager.getAll(`articles?coronavirus=true&${params_list}`).then(setFeed).then(updateLoading);
-		} else if (location.pathname === '/feed/custom') {
+		} else if (pathname === '/feed/custom') {
 			ApiManager.getAll(`articles?custom=true&${params_list}`).then(setFeed).then(updateLoading);
-		} else if (location.pathname === `/feed/saved`) {
+		} else if (pathname === `/feed/saved`) {
 			ApiManager.getAll(`articles?saved=true&${params_list}`).then(setFeed).then(updateLoading);
-		} else if (location.pathname === `/feed/favorites`) {
+		} else if (pathname === `/feed/favorites`) {
 			ApiManager.getAll(`articles?favorites=true&${params_list}`).then(setFeed).then(updateLoading);
-		} else if (location.pathname === `/feed/mysummaries`) {
+		} else if (pathname === `/feed/mysummaries`) {
 			ApiManager.getAll(`articles?usersummaries=true&${params_list}`).then(setFeed).then(updateLoading);
 		} else {
 			ApiManager.getAll(`articles?${params_list}`).then(setFeed).then(updateLoading);
@@ -180,7 +180,6 @@ export default function Home() {
 
 	return (
 		<React.Fragment>
-			
 			<FeedActions 
 				loading={loading} 
 				feed={feed} 
@@ -239,7 +238,7 @@ export default function Home() {
 				next={feed.next} 
 				getNewPage={getNewPage} 
 			/>
-
+			
 		</React.Fragment>
 	);
 }
