@@ -4,6 +4,22 @@
 	font-family: 'Courier New', Courier, monospace;
 }
 
-.button-container {
+/* .button-container {
     display: inline;
+} */
+.pagination {
+	display: inline;
 }
+
+@media only screen and (max-width: 700px) {
+	.button-container {
+		display: block;
+	}
+	.button-container button {
+		font-size: 14px;
+	}
+	.pagination {
+		display: inline;
+		align-items: left;
+	}
+  }

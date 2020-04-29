@@ -3,12 +3,12 @@ import './PageButtons.css'
 
 export default function PageButtons({ loading, previous, next, getNewPage }) {
 	return (
-		<div className="button-container">
+		<div className="button-container pagination">
 			<button disabled={loading || !previous} onClick={()=>getNewPage(previous)}>
-				Prev
+				{window.innerWidth < 700 ? '<' : 'Prev'}
 			</button>
 			<button disabled={loading || !next} onClick={()=>getNewPage(next)}>
-				Next
+				{window.innerWidth < 700 ? '>' : 'Next'}
 			</button>
 		</div>
 	);

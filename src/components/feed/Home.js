@@ -78,6 +78,7 @@ export default function Home() {
 		if (url != null) {
 			updateLoading();
 			ApiManager.getPage(url).then(setFeed).then(updateLoading).then(()=>setSummaryIndex(0));
+			window.scrollTo(0,0)
 		}
 	};
 
@@ -211,6 +212,12 @@ export default function Home() {
 						: 
 						<NoResultsMessage filter={parsed?.filter} />
 					)}
+					<PageButtons 
+						loading={loading} 
+						previous={feed.previous} 
+						next={feed.next} 
+						getNewPage={getNewPage} 
+					/>
 				</div>
 				<div className="right">
 					{selectedArticle && (
@@ -232,12 +239,6 @@ export default function Home() {
 				</div>
 			</div>
 
-			<PageButtons 
-				loading={loading} 
-				previous={feed.previous} 
-				next={feed.next} 
-				getNewPage={getNewPage} 
-			/>
 			
 		</React.Fragment>
 	);

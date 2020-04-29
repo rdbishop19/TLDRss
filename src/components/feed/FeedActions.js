@@ -8,9 +8,6 @@ export default function FeedActions(props) {
     const { getNewPage, setSort, updateFeedSubscription } = actions
     return (
         <div className="feed-nav">
-				<PageButtons loading={loading} previous={feed.previous} next={feed.next} getNewPage={getNewPage} />
-				{feed.results.length && loading ? <EllipsisLoader /> : undefined}
-				{/* <br /> */}
 				{params.feedId &&
                 feed.results.length > 0 && 
                     <SubscribeToFeedButton 
@@ -19,10 +16,13 @@ export default function FeedActions(props) {
                         updateFeedSubscription={updateFeedSubscription} 
                     />
                 }
-				<span className="button-container sort">Sort by: 
+				<PageButtons loading={loading} previous={feed.previous} next={feed.next} getNewPage={getNewPage} />
+				{feed.results.length && loading ? <EllipsisLoader /> : undefined}
+				{/* <br /> */}
+				<div className="button-container sort">
 					<button className={sort ? "sort-selected" : "sort-unselected"} onClick={() => setSort(true)}>Top</button>
 					<button className={sort ? "sort-unselected" : "sort-selected"} onClick={() => setSort(false)}>Newest</button>
-				</span>
+				</div>
 				<br />
 			</div>
     )

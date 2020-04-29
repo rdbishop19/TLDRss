@@ -39,7 +39,7 @@ export default function Search() {
 
     return (
         <form onSubmit={handleSubmit}>
-            <span className="search">
+            <div className="search">
                 <img 
                     className="search-icon" 
                     src="https://img.icons8.com/material-outlined/16/000000/search.png" 
@@ -60,7 +60,7 @@ export default function Search() {
                     title="clear search"
                     onClick={clearSearch} 
                 />
-            </span>
+            </div>
         </form>
     )
 }

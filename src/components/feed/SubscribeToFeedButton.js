@@ -4,15 +4,16 @@ import { Link } from 'react-router-dom'
 
 export default function SubscribeToFeedButton({ params, source, updateFeedSubscription }) {
     return (
-        <span className="button-container subscribe">
+        <div className="button-container subscribe">
             {
                 isAuthenticated() 
                 ? 
                 <button onClick={()=>updateFeedSubscription(params.feedId)}>
-                    Add {source.name} to my feed
+                    Subscribe to {source.name}
                 </button> 
                 : 
                 <Link 
+                    // className="subscribe"
                     style={{color:"orange"}} 
                     to={{
                         pathname:"/login", 
@@ -22,6 +23,6 @@ export default function SubscribeToFeedButton({ params, source, updateFeedSubscr
                     Login to subscribe to feed sources
                 </Link>
             }
-        </span>
+        </div>
     )
 }

@@ -127,3 +127,15 @@
 .upvote-link:hover .show-me {
 	transform: translate(0px, 1px);
 }
+
+@media only screen and (max-width: 700px) {
+	.article-link: {
+		width: 100%;
+	}
+	.upvote-link {
+		display: none;
+	}
+	.article-extras {
+		padding: 5px 0px;
+	}
+  }

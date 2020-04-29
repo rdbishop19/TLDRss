@@ -2,15 +2,14 @@
 	margin: 10px;
 }
 
-
 h2 {
 	font-family: 'Courier New', Courier, monospace;
 }
-
+/* 
 .full {
 	display: table;
 	width: 100%;
-}
+} */
 .left {
 	display: table-cell;
 	vertical-align: top;
@@ -28,6 +27,7 @@ h2 {
 
 .sort {
 	margin-left: 200px;
+	display: inline;
 }
 
 .sort-selected {
@@ -39,3 +39,34 @@ h2 {
 .sort-unselected {
 	color: none;
 }
+
+@media only screen and (max-width: 700px) {
+	.feed-nav {
+	  /* display: block; */
+	  float: left;
+	  width: 100%;
+	  padding: 0px;
+	  margin: 0px;
+	}
+	.subscribe {
+		display: block;
+		text-align: left;
+		margin: 0px;
+		text-decoration: underline;
+		text-shadow: "0.5px";
+		text-align: center;
+		margin-bottom: 10px;
+	}
+	.left {
+		display: block;
+		width: 100%;
+	}
+	.right {
+		display: block;
+		width: 100%;
+	}
+	.sort {
+		margin: 0px;
+		float: right;
+	}
+  }
