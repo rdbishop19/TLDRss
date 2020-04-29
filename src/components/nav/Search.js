@@ -40,9 +40,9 @@ export default function Search() {
         <form onSubmit={handleSubmit}>
             <span className="search">
                 <img className="search-icon" src="https://img.icons8.com/material-outlined/16/000000/search.png" alt="search"/>
-                <input ref={inputRef} tabIndex="1" className="search-input" onChange={handleChange} placeholder="search" value={searchText}/>
+                <input ref={inputRef} tabIndex="8" className="search-input" onChange={handleChange} placeholder="search" value={searchText}/>
                 {searchText.length ? 
-                    <button className="clear-button" type="button" tabIndex="2" onClick={clearSearch}>
+                    <button className="clear-button" type="button" tabIndex="9" onClick={clearSearch}>
                         <img 
                             src="https://img.icons8.com/material-outlined/16/000000/clear-symbol.png"
                             // src="https://img.icons8.com/material/16/000000/clear-symbol--v1.png" 
