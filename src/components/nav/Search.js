@@ -20,10 +20,11 @@ export default function Search() {
         evt.preventDefault()
         const newPath = 
             pathname === "/login" || pathname === "/register" ? '/feed' : pathname
+        const searchFilter = searchText ? `filter=${encodeURIComponent(searchText)}` : ""
         // used when user enters search item from login or register views
         history.push({
             pathname: newPath, 
-            search: `filter=${encodeURIComponent(searchText)}`
+            search: searchFilter
         })
     }
 
@@ -39,20 +40,26 @@ export default function Search() {
     return (
         <form onSubmit={handleSubmit}>
             <span className="search">
-                <img className="search-icon" src="https://img.icons8.com/material-outlined/16/000000/search.png" alt="search"/>
-                <input ref={inputRef} tabIndex="8" className="search-input" onChange={handleChange} placeholder="search" value={searchText}/>
-                {searchText.length ? 
-                    <button className="clear-button" type="button" tabIndex="9" onClick={clearSearch}>
-                        <img 
-                            src="https://img.icons8.com/material-outlined/16/000000/clear-symbol.png"
-                            // src="https://img.icons8.com/material/16/000000/clear-symbol--v1.png" 
-                            alt='clear'
-                            title="clear search filter"
-                        />
-                    </button>
-                    : undefined
-                }
-                
+                <img 
+                    className="search-icon" 
+                    src="https://img.icons8.com/material-outlined/16/000000/search.png" 
+                    alt="search"
+                />
+                <input 
+                    type="text"
+                    ref={inputRef} 
+                    tabIndex="8" 
+                    className="search-input" 
+                    onChange={handleChange} 
+                    placeholder="search" 
+                    value={searchText}/>
+                <input 
+                    type="button" 
+                    className="clear-button" 
+                    tabIndex="9"
+                    title="clear search"
+                    onClick={clearSearch} 
+                />
             </span>
         </form>
     )

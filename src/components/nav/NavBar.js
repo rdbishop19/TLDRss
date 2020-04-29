@@ -50,7 +50,7 @@ function NavBar() {
                             coronavirus
                         </NavLink>
                     </li>
-                    <li tabIndex="7" className="nav-list-item">
+                    <li className="nav-list-item">
                         <Search />
                     </li>
                 </ul>
