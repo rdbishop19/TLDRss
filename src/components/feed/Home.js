@@ -180,7 +180,7 @@ export default function Home() {
 	);
 
 	return (
-		<React.Fragment>
+		<div className="main">
 			<FeedActions 
 				loading={loading} 
 				feed={feed} 
@@ -240,6 +240,6 @@ export default function Home() {
 			</div>
 
 			
-		</React.Fragment>
+		</div>
 	);
 }

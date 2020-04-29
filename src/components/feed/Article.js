@@ -27,7 +27,7 @@ export default function Article({ article, number, methods, isMainView, isLogged
 				<div className="arrow-up show-me"></div>
             </td>
 			<td>
-			    <ArticleData article={article} methods={{...methods, handleSummaryClick}} isMainView={isMainView} isLoggedIn={isLoggedIn}/>
+			    <ArticleData article={article} index={index} methods={{...methods, handleSummaryClick}} isMainView={isMainView} isLoggedIn={isLoggedIn}/>
 			</td>
             <td title="view tl;drs" onClick={handleSummaryClick} className="tldr-link">
                 <div className="arrow-right show-me" style={selectedArrowStyle}></div>

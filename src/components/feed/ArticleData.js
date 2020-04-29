@@ -3,7 +3,7 @@ import moment from 'moment';
 import { Link, useLocation } from 'react-router-dom';
 import { isAuthenticated } from '../auth/simpleAuth';
 
-export default function ArticleData({ article, methods, isMainView, isLoggedIn }) {
+export default function ArticleData({ article, index, methods, isMainView, isLoggedIn }) {
 
 	const location = useLocation()
 	return (
@@ -24,21 +24,25 @@ export default function ArticleData({ article, methods, isMainView, isLoggedIn }
 				</Link>)
 			</span>
 			<div className="article-extras">
-				<span>{article.upvote_count} vote(s)</span>{" | "}
-				<span className="timestamp">{article.pub_date ? moment(article.pub_date).fromNow() : 'some time ago'}</span>{" | "}
-				{isMainView && <><span className="fake-link" title="view tl;drs" onClick={methods.handleSummaryClick}>tl;dr</span>{" | "}</>}
+				<div onClick={()=>methods.upvoteArticle(article.id, index)} title="upvote" className="upvote-link mobile">
+					<div className="arrow-up show-me"></div>
+                	<div className="arrow-up"></div>
+				</div>
+				<span>{article.upvote_count} vote(s)</span>
+				<span className="timestamp">{article.pub_date ? moment(article.pub_date).fromNow() : 'some time ago'}</span>
+				{isMainView && <><span className="fake-link" title="view tl;drs" onClick={methods.handleSummaryClick}>tl;dr</span></>}
 				{(isMainView && isLoggedIn) && (
 					<React.Fragment>
 						{location.pathname === "/feed/saved" ? 
 						<>
 							<span className="fake-link" title="read later" onClick={()=>methods.deleteSavedArticle(article.url)}>
 								remove
-							</span>{" | "}
+							</span>
 						</> :
 						<>
 							<span className="fake-link" title="read later" onClick={()=>methods.saveArticle(article.id)}>
 								save
-							</span>{" | "}
+							</span>
 						</>}
 					</React.Fragment>
 				)

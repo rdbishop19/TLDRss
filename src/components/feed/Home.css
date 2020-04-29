@@ -5,11 +5,10 @@
 h2 {
 	font-family: 'Courier New', Courier, monospace;
 }
-/* 
 .full {
 	display: table;
 	width: 100%;
-} */
+}
 .left {
 	display: table-cell;
 	vertical-align: top;
@@ -69,4 +68,13 @@ h2 {
 		margin: 0px;
 		float: right;
 	}
+	.main {
+		margin: 8px
+	}
   }
+
+@media only screen and (max-width: 700px) and (orientation: portrait) {
+	.main {
+		padding-top: 160px;
+	}
+}
