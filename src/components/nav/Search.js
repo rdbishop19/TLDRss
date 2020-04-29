@@ -10,6 +10,7 @@ export default function Search() {
     const { pathname } = location
     const parsed = parse(location.search);
     const inputRef = createRef()
+    const clearRef = createRef()
     
     const [searchText, setSearchText ] = useState(parsed?.filter || '')
 
@@ -18,6 +19,7 @@ export default function Search() {
     }
     const handleSubmit = evt => {
         evt.preventDefault()
+        clearRef.current.focus()
         const newPath = 
             pathname === "/login" || pathname === "/register" ? '/feed' : pathname
         const searchFilter = searchText ? `filter=${encodeURIComponent(searchText)}` : ""
@@ -33,8 +35,7 @@ export default function Search() {
         if (parsed.filter){
             history.push(pathname)
         }
-        inputRef.current.focus()
-
+        // inputRef.current.focus()
     }
 
     return (
@@ -55,6 +56,7 @@ export default function Search() {
                     value={searchText}/>
                 <input 
                     type="button" 
+                    ref={clearRef}
                     className="clear-button" 
                     tabIndex="9"
                     title="clear search"
