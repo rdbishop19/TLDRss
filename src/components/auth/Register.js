@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useHistory, useLocation, Link } from 'react-router-dom';
 import { register } from './simpleAuth';
+import './Auth.css'
 
 export default function Register() {
 	const [ user, setUser ] = useState();
@@ -112,12 +113,12 @@ export default function Register() {
 					/>
 				</fieldset> */}
 				<fieldset>
-					<button type="submit">Register</button>
+					<button className="button--auth button--action" type="submit">Register</button>
 				</fieldset>
 			</form>
 			<br/>
 			<p>Already have an account?</p>
-			<button><Link style={{ color: 'black' }} to={{pathname:'/login', state: {articleId: articleId}}}>Login</Link></button>
+			<button className="button--auth"><Link style={{ color: 'black' }} to={{pathname:'/login', state: {articleId: articleId}}}>Login</Link></button>
 		</main>
 	);
 }

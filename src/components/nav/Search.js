@@ -49,7 +49,6 @@ export default function Search() {
                 <input 
                     type="text"
                     ref={inputRef} 
-                    tabIndex="8" 
                     className="search-input" 
                     onChange={handleChange} 
                     placeholder="search" 
@@ -58,7 +57,6 @@ export default function Search() {
                     type="button" 
                     ref={clearRef}
                     className="clear-button" 
-                    tabIndex="9"
                     title="clear search"
                     onClick={clearSearch} 
                 />

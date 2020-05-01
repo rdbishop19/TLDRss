@@ -1,0 +1,28 @@
+main {
+    padding-top: 40px;
+}
+
+
+.button--auth {
+	border-radius: 3px;
+	font-family: 'Courier New', Courier, monospace;
+	background-color: rgba(255, 0, 255, 0.356);
+}
+
+.button--action {
+	background-color: greenyellow;
+}
+@media only screen and (max-width: 700px) and (orientation: portrait) {
+	main {
+		padding-top: 160px;
+	}
+	input {
+		display: block;
+		margin: 0 auto;
+		font-size: 16px;
+		margin-top: 5px;
+	}
+	.button--auth {
+		font-size: 20px;
+	}
+}

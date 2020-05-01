@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useHistory, useLocation, Link } from 'react-router-dom';
 import { login } from './simpleAuth';
+import './Auth.css'
 
 export default function Login() {
 	const [ user, setUser ] = useState();
@@ -36,7 +37,8 @@ export default function Login() {
 	return (
 		<main style={{ textAlign: 'center' }}>
 			<form className="form--login" onSubmit={handleLogin}>
-				<h1 className="h3 mb-3 font-weight-normal">Login</h1>
+				<h1 className="h3 mb-3 font-weight-normal">Welcome Back!</h1>
+				{/* <h1 className="h3 mb-3 font-weight-normal">Login</h1> */}
 				<fieldset>
 					<label htmlFor="userName"> Username </label>
 					<input
@@ -63,12 +65,12 @@ export default function Login() {
 					/>
 				</fieldset>
 				<fieldset>
-					<button type="submit">Login</button>
+					<button className="button--auth button--action" type="submit">Login</button>
 				</fieldset>
 			</form>
 			<br/>
 			<p>First time here? Join us!</p>
-			<button><Link style={{ color: 'black' }} to={{pathname:'/register', state: {articleId: articleId, feedId: feedId}}}>Register</Link></button>
+			<button className="button--auth"><Link style={{ color: 'black' }} to={{pathname:'/register', state: {articleId: articleId, feedId: feedId}}}>Register</Link></button>
 		</main>
 	);
 }

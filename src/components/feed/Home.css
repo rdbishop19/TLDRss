@@ -2,6 +2,10 @@
 	margin: 10px;
 }
 
+.main {
+	padding-top: 20px;
+}
+
 h2 {
 	font-family: 'Courier New', Courier, monospace;
 }
@@ -61,20 +65,20 @@ h2 {
 		width: 100%;
 	}
 	.right {
-		display: block;
-		width: 100%;
+		display: none;
 	}
 	.sort {
 		margin: 0px;
 		float: right;
 	}
 	.main {
-		margin: 8px
+		margin: 8px;
+		padding-top: 40px;
 	}
   }
 
-@media only screen and (max-width: 700px) and (orientation: portrait) {
+/* @media only screen and (max-width: 700px) and (orientation: portrait) {
 	.main {
-		padding-top: 160px;
+		padding-top: 60px;
 	}
-}
+} */

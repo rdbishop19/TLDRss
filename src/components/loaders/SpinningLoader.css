@@ -12,7 +12,7 @@
 	height: 0;
 	margin: 8px;
 	box-sizing: border-box;
-	border: 32px solid #e7780f75;
+	border: 32px solid;
 	border-color: #3333333d transparent #3333333d transparent;
 	animation: lds-hourglass 1.2s infinite;
 }
@@ -27,5 +27,20 @@
 	}
 	100% {
 		transform: rotate(1800deg);
+	}
+}
+
+@media only screen and (max-width: 700px) {
+	.lds-hourglass {
+		position: absolute;
+		margin: -7px;
+		display: inherit;
+		width: 100%;
+		padding-top: 70%;
+	}
+	.lds-hourglass:after {
+		border: 60px solid;
+		margin-left: 30%;
+		border-color: #3333333d transparent #3333333d transparent;
 	}
 }

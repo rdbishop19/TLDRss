@@ -191,6 +191,7 @@ export default function Home() {
 
 			{feed?.results?.length ? <FeedCount count={feed?.count} /> : undefined}
 
+			{/* <SpinningLoader /> */}
 			<div className="full">
 				<div className="left">   
 					{feed.results.length ? (
@@ -212,12 +213,12 @@ export default function Home() {
 						: 
 						<NoResultsMessage filter={parsed?.filter} />
 					)}
-					<PageButtons 
+					{!loading && <PageButtons 
 						loading={loading} 
 						previous={feed.previous} 
 						next={feed.next} 
 						getNewPage={getNewPage} 
-					/>
+					/>}
 				</div>
 				<div className="right">
 					{selectedArticle && (
