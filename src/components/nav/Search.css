@@ -47,11 +47,21 @@
 @media only screen and (max-width: 700px) {
     .search {
         float: left;
-        width: 100%;
+        width: 80%;
         margin-bottom: 15px;
-        align-items: center;
+        justify-content: start;
     }
     .search-input {
         font-size: 16px;
+        width: 90%;
+    }
+    .search-icon {
+        display: none;
+        margin: 0;
+    }
+    .clear-button {
+        float: right;
+        margin-top: -20px;
+        margin-right: -40px;
     }
 }

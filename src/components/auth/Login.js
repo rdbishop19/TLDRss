@@ -7,9 +7,11 @@ export default function Login() {
 	const [ user, setUser ] = useState();
 	const history = useHistory();
 	const location = useLocation()
-	const articleId = location.state ? location.state.articleId : null
-	const feedId = location.state ? location.state.feedId : null
-
+	const articleId = location?.state?.articleId || null
+	const feedId = location?.state?.feedId || null
+	const path = location?.state?.path || null
+	const pathname = path ? path : feedId ? `/feed/source/${feedId}` : "/";
+	
 	const handleInputChange = (evt) => {
 		setUser({
 			...user,
@@ -29,7 +31,7 @@ export default function Login() {
 		// Make fetch call with the object as the body of the POST request
 		login(credentials).then((response) => {
 			if (response === true) {
-				history.push({pathname: feedId ? `/feed/source/${feedId}` : "/", state: {articleId: articleId, feedId: feedId}});
+				history.push({ pathname, state: { articleId, feedId }});
 			} else window.alert('Username/password combination do not exist');
 		});
 	};
@@ -65,12 +67,27 @@ export default function Login() {
 					/>
 				</fieldset>
 				<fieldset>
-					<button className="button--auth button--action" type="submit">Login</button>
+					<button 
+						className="button--auth button--action"
+						type="submit"
+					>
+						Login
+					</button>
 				</fieldset>
 			</form>
 			<br/>
 			<p>First time here? Join us!</p>
-			<button className="button--auth"><Link style={{ color: 'black' }} to={{pathname:'/register', state: {articleId: articleId, feedId: feedId}}}>Register</Link></button>
+			<button className="button--auth">
+				<Link 
+					style={{ color: 'black' }}
+					to={{
+						pathname:'/register',
+						state: { path, articleId, feedId }
+					}}
+				>
+					Register
+				</Link>
+			</button>
 		</main>
 	);
 }

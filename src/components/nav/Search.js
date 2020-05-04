@@ -3,8 +3,9 @@ import { parse } from 'query-string';
 import { useLocation, useHistory } from 'react-router-dom';
 import './Search.css';
 
-export default function Search() {
+export default function Search({ methods: { setMenuOpen } }) {
 
+    // console.log('methods', methods)
     const history = useHistory()
     const location = useLocation()
     const { pathname } = location
@@ -20,8 +21,10 @@ export default function Search() {
     const handleSubmit = evt => {
         evt.preventDefault()
         clearRef.current.focus()
+        setMenuOpen(false)
+        const REGEX = new RegExp(/\/feed\/articles\/\d+/, 'gi');
         const newPath = 
-            pathname === "/login" || pathname === "/register" ? '/feed' : pathname
+            pathname === "/login" || pathname === "/register" || pathname.match(REGEX) ? '/feed' : pathname
         const searchFilter = searchText ? `filter=${encodeURIComponent(searchText)}` : ""
         // used when user enters search item from login or register views
         history.push({

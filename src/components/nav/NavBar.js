@@ -34,6 +34,11 @@ function NavBar() {
         setMenuOpen(false)
     }
 
+    const handleHomeClick = () => {
+        setMenuOpen(false)
+        history.push('/feed')
+    }
+
     const menuStyle = {
         float: "none",
         display: "block",
@@ -44,36 +49,36 @@ function NavBar() {
        <React.Fragment>
             <div className="nav-container">
                 <ul className="nav-list">
-                    <li onClick={handleClick}  className="nav-list-item logo"><span>TL;D<span className="logo-rss">Rss</span></span></li>
-                    <li onClick={handleClick}  style={ menuOpen ? menuStyle : undefined } className="nav-list-item"><NavLink activeClassName="active-link" to='/feed' exact>home</NavLink></li>
+                    <li onClick={handleHomeClick} className="nav-list-item logo"><span>TL;D<span className="logo-rss">Rss</span></span></li>
+                    <li onClick={handleClick} style={ menuOpen ? menuStyle : undefined } className="nav-list-item"><NavLink activeClassName="active-link" to='/feed' exact>home</NavLink></li>
                     {isAuthenticated() && 
                         <> 
-                            <li onClick={handleClick}  style={ menuOpen ? menuStyle : undefined } className="nav-list-item"><NavLink activeClassName="active-link" to='/feed/custom'>my feed</NavLink></li>
-                            <li onClick={handleClick}  style={ menuOpen ? menuStyle : undefined } className="nav-list-item"><NavLink activeClassName="active-link" to='/feed/saved'>saved</NavLink></li>
-                            <li onClick={handleClick}  style={ menuOpen ? menuStyle : undefined } className="nav-list-item"><NavLink activeClassName="active-link" to='/feed/favorites'>favorites</NavLink></li>
-                            <li onClick={handleClick}  style={ menuOpen ? menuStyle : undefined } className="nav-list-item"><NavLink activeClassName="active-link" to='/feed/mysummaries'>posts</NavLink></li>
+                            <li onClick={handleClick} style={ menuOpen ? menuStyle : undefined } className="nav-list-item"><NavLink activeClassName="active-link" to='/feed/custom'>my feed</NavLink></li>
+                            <li onClick={handleClick} style={ menuOpen ? menuStyle : undefined } className="nav-list-item"><NavLink activeClassName="active-link" to='/feed/saved'>saved</NavLink></li>
+                            <li onClick={handleClick} style={ menuOpen ? menuStyle : undefined } className="nav-list-item"><NavLink activeClassName="active-link" to='/feed/favorites'>favorites</NavLink></li>
+                            <li onClick={handleClick} style={ menuOpen ? menuStyle : undefined } className="nav-list-item"><NavLink activeClassName="active-link" to='/feed/mysummaries'>posts</NavLink></li>
                         </>
                     }
                     <li onClick={handleClick}  style={ menuOpen ? menuStyle : undefined } className="nav-list-item special">
-                        <NavLink activeClassName="active-special" className="special" to='/coronavirus'>
+                        <NavLink activeClassName="active-link active-special" className="special" to='/coronavirus'>
                             coronavirus
                         </NavLink>
                     </li>
-                    <li onClick={handleClick}  className="nav-list-item">
-                        <Search />
+                    <li id="search" className="nav-list-item">
+                        <Search methods={{setMenuOpen}}/>
                     </li>
-                    <li onClick={handleClick}  id="hamburger" className="nav-list-item icon" onClick={toggleMobileDrawer}>
+                    <li id="hamburger" style={ menuOpen ? { display: 'none' } : undefined } className="nav-list-item icon" onClick={toggleMobileDrawer}>
                         <i className="fa fa-lg fa-bars"></i>
                     </li>
                     {!isAuthenticated() ?
                         <>
-                            <li onClick={handleClick}  style={ menuOpen ? menuStyle : undefined } className="nav-list-item float-right"><NavLink activeClassName="active-link" className="account" to={{pathname:'/register', state: {articleId: articleId}}}>register</NavLink></li>
-                            <li onClick={handleClick}  style={ menuOpen ? menuStyle : undefined } className="nav-list-item float-right"><NavLink activeClassName="active-link" className="account" to={{pathname:'/login', state: {articleId: articleId}}}>login</NavLink></li>
+                            <li onClick={handleClick} style={ menuOpen ? menuStyle : undefined } className="nav-list-item float-right"><NavLink activeClassName="active-link" className="account" to={{pathname:'/register', state: {articleId: articleId}}}>register</NavLink></li>
+                            <li onClick={handleClick} style={ menuOpen ? menuStyle : undefined } className="nav-list-item float-right"><NavLink activeClassName="active-link" className="account" to={{pathname:'/login', state: {articleId: articleId}}}>login</NavLink></li>
                         </>
                         :
                         <>
-                            <li onClick={handleClick}  style={ menuOpen ? menuStyle : undefined } className="nav-list-item float-right logout"><button className="account" onClick={handleLogout}>logout</button></li>
-                            <li onClick={handleClick}  style={ menuOpen ? menuStyle : undefined } className="nav-list-item float-right username">{user && user.username}</li>
+                            <li onClick={handleClick} style={ menuOpen ? menuStyle : undefined } className="nav-list-item float-right logout"><button className="account" onClick={handleLogout}>logout</button></li>
+                            <li onClick={handleClick} style={ menuOpen ? menuStyle : undefined } className="nav-list-item float-right username">{user && user.username}</li>
                         </>
                     }
                 </ul>

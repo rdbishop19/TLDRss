@@ -9,6 +9,8 @@ export default function Register() {
 	const location = useLocation()
 	const articleId = location.state ? location.state.articleId : null
 	const feedId = location.state ? location.state.feedId : null
+	const path = location?.state?.path || null
+	const pathname = path ? path : feedId ? `/feed/source/${feedId}` : "/";
 
 	const handleInputChange = (evt) => {
 		setUser({
@@ -29,7 +31,7 @@ export default function Register() {
 		register(new_user)
 			.then(response => {
 				if (response === true) {
-					history.push({pathname: feedId ? `/feed/source/${feedId}` : "/", state: {articleId: articleId, feedId: feedId}});
+					history.push({ pathname, state: { articleId, feedId }});
 				} else window.alert('Username already exists. Please use another.')
 			});
 		// register(new_user).then(history.push({pathname:'/', state: {articleId: articleId}}));
@@ -118,7 +120,17 @@ export default function Register() {
 			</form>
 			<br/>
 			<p>Already have an account?</p>
-			<button className="button--auth"><Link style={{ color: 'black' }} to={{pathname:'/login', state: {articleId: articleId}}}>Login</Link></button>
+			<button className="button--auth">
+				<Link 
+					style={{ color: 'black' }} 
+					to={{ 
+						pathname:'/login',
+						state: { path, articleId, feedId }
+					}}
+				>
+					Login
+				</Link>
+			</button>
 		</main>
 	);
 }
