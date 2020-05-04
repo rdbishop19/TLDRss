@@ -1,6 +1,6 @@
 import React from 'react';
 import './Article.css';
-import ArticleData from './ArticleData';
+import { ArticleData } from './ArticleData';
 
 export default function Article({ article, number, methods, isMainView, isLoggedIn, index, config }) {
 
@@ -8,7 +8,7 @@ export default function Article({ article, number, methods, isMainView, isLogged
 	
 	const handleSummaryClick = () => {
 		methods.highlightSelectedArticle(index)
-		methods.getSummaries(article.id)
+		methods.handleTldrClick(article.id)
 	}
 
 	const selectedArrowStyle = {

@@ -4,6 +4,7 @@ import Home from './feed/Home'
 import Register from './auth/Register'
 import Login from './auth/Login'
 import { isAuthenticated } from './auth/simpleAuth'
+import { SummaryContainer } from './feed/SummaryContainer'
 
 export default function ApplicationViews() {
     
@@ -24,6 +25,7 @@ export default function ApplicationViews() {
             <Route path="/feed/saved" component={Home} />
             <Route path="/feed/favorites" component={Home} />
             <Route path="/feed/mysummaries" component={Home} />
+            <Route path="/feed/articles/:articleId(\d+)" component={SummaryContainer} />
 
             {/* SUMMARY ROUTES */}
             <Route path="/tldr/favorites" render={props => <p>TLDR FAVORITE LIST</p>} />

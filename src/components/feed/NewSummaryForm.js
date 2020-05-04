@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import './Form.css';
 
-export default function NewSummaryForm({ selected, methods: { postNewSummary, patchSummary }, userSummary, status }) {
+export default function NewSummaryForm({ selected, methods: { postNewSummary, patchSummary }, userSummary, isEditing }) {
     const [ summaryText, setSummaryText ] = useState(
-        status ? userSummary.summary_text : ''
+        isEditing ? userSummary.summary_text : ''
     );
 	const [ charCount, setCharCount ] = useState(255);
 
@@ -15,7 +15,7 @@ export default function NewSummaryForm({ selected, methods: { postNewSummary, pa
 		evt.preventDefault();
 
         // handle EDIT (PATCH) request
-        if (status) {
+        if (isEditing) {
             const edited_summary = {
                 summary_text: summaryText
             }

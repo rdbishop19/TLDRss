@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import ApiManager from '../../modules/ApiManager';
 import './Home.css';
 import FeedContainer from './FeedContainer';
-import SummaryContainer from './SummaryContainer';
+// import {SummaryContainer} from './SummaryContainer';
 import { isAuthenticated } from '../auth/simpleAuth';
 import { useLocation, useParams } from 'react-router-dom';
 import { parse } from 'query-string';
@@ -12,6 +12,7 @@ import FeedActions from './FeedActions';
 import FeedCount from './FeedCount';
 import SpinningLoader from '../loaders/SpinningLoader';
 import NoResultsMessage from './NoResultsMessage';
+import { SummaryContainer } from './SummaryContainer';
 
 export default function Home() {
 	const location = useLocation();
@@ -30,12 +31,12 @@ export default function Home() {
 		results: []
 	});
 	const [ loading, setLoading ] = useState(false);
-	const [ summaries, setSummaries ] = useState({
-		results: []
-	});
+	// const [ summaries, setSummaries ] = useState({
+	// 	results: []
+	// });
 	const [ selectedArticle, setSelectedArticle ] = useState(null);
-	const [ userSummary, setUserSummary ] = useState(null);
-	const [ isEditing, setIsEditing ] = useState(false)
+	// const [ userSummary, setUserSummary ] = useState(null);
+	// const [ isEditing, setIsEditing ] = useState(false)
 	const [ summaryIndex, setSummaryIndex ] = useState(0)
 
 	const updateLoading = () => setLoading((prevState) => !prevState);
@@ -82,40 +83,43 @@ export default function Home() {
 		}
 	};
 
-	// handle redirect from register/login; otherwise, get first article info
-	const getPrevArticle = () => {
-		if (prevArticleId) {
-			getSummaries(prevArticleId);
-		} else if (feed.results.length) {
-			getSummaries(feed.results[0].id);
-		}
-	};
+	// // handle redirect from register/login; otherwise, get first article info
+	// const getPrevArticle = () => {
+	// 	if (prevArticleId) {
+	// 		getSummaries(prevArticleId);
+	// 	} else if (feed.results.length) {
+	// 		getSummaries(feed.results[0].id);
+	// 	}
+	// };
 
-	const getSummaries = (articleId) => {
-		// if(selectedArticle){
-		// 	if (window.confirm("Clear current submission?")){
-		// 		setSelectedArticle(articleId);
-		// 	} else return
-		// }
-		setIsEditing(false);
-		setSelectedArticle(articleId);
-		if (isAuthenticated()) {
-			ApiManager.getAll(`summaries?article=${articleId}&user=true`).then((res) => setUserSummary(res.results[0]));
-		}
-		ApiManager.getAll(`summaries?article=${articleId}`).then(setSummaries);
-	};
-
-	const postNewSummary = (item) => {
-		ApiManager.post('summaries', item).then(() => getSummaries(selectedArticle));
-	};
-
-	const patchSummary = (url, obj) => {
-		ApiManager.patch(url, obj).then(()=> getSummaries(selectedArticle));
+	const handleTldrClick = (articleId) => {
+		setSelectedArticle(articleId)
 	}
+	// const getSummaries = (articleId) => {
+	// 	// if(selectedArticle){
+	// 	// 	if (window.confirm("Clear current submission?")){
+	// 	// 		setSelectedArticle(articleId);
+	// 	// 	} else return
+	// 	// }
+	// 	setIsEditing(false);
+	// 	setSelectedArticle(articleId);
+	// 	if (isAuthenticated()) {
+	// 		ApiManager.getAll(`summaries?article=${articleId}&user=true`).then((res) => setUserSummary(res.results[0]));
+	// 	}
+	// 	ApiManager.getAll(`summaries?article=${articleId}`).then(setSummaries);
+	// };
 
-	const openEditDialog = (url) => {
-		setIsEditing(true)
-	}
+	// const postNewSummary = (item) => {
+	// 	ApiManager.post('summaries', item).then(() => getSummaries(selectedArticle));
+	// };
+
+	// const patchSummary = (url, obj) => {
+	// 	ApiManager.patch(url, obj).then(()=> getSummaries(selectedArticle));
+	// }
+
+	// const openEditDialog = (url) => {
+	// 	setIsEditing(true)
+	// }
 
 	const saveArticle = id => {
 		// console.log('saving', id)
@@ -147,34 +151,34 @@ export default function Home() {
 		)
 	}
 
-	const upvoteSummary = (id, idx) => {
-		// post new summary to db
-		ApiManager.post('summaryupvotes', {summary_id: id})
-			.then(res => {
-				if (res.url){
-					// map through results array to find current index
-					let summaryList = summaries.results.map((summary, index) => idx === index ? {...summary, upvote_count: (summary.upvote_count + 1) } : summary)
-					// destructure and reset state
-					setSummaries({...summaries, results: summaryList})
-				}
-			})
-	}
+	// const upvoteSummary = (id, idx) => {
+	// 	// post new summary to db
+	// 	ApiManager.post('summaryupvotes', {summary_id: id})
+	// 		.then(res => {
+	// 			if (res.url){
+	// 				// map through results array to find current index
+	// 				let summaryList = summaries.results.map((summary, index) => idx === index ? {...summary, upvote_count: (summary.upvote_count + 1) } : summary)
+	// 				// destructure and reset state
+	// 				setSummaries({...summaries, results: summaryList})
+	// 			}
+	// 		})
+	// }
 
-	const deleteSummary = url => {
-		ApiManager.delete(url).then(() => getSummaries(selectedArticle))
-	}
+	// const deleteSummary = url => {
+	// 	ApiManager.delete(url).then(() => getSummaries(selectedArticle))
+	// }
 
 	const highlightSelectedArticle = (index) => {
 		setSummaryIndex(index)
 	}
-	useEffect(getPrevArticle, [feed])
+	// useEffect(getPrevArticle, [feed])
 
 	useEffect(
 		() => {
 			// console.log('useEffect')
 			setSearchTerm(parsed.filter);
 			getFeed();
-			getPrevArticle();
+			// getPrevArticle(); // TODO
 		},
 		[ parsed.filter, sort ]
 	);
@@ -199,11 +203,12 @@ export default function Home() {
 							feed={feed} 
 							config={{summaryIndex}} 
 							methods={{ 
-								getSummaries, 
+								handleTldrClick,
 								saveArticle, 
 								deleteSavedArticle, 
 								upvoteArticle, 
-								highlightSelectedArticle 
+								highlightSelectedArticle,
+								setLoading,
 							}} 
 						/>
 					) : ( 
@@ -221,22 +226,27 @@ export default function Home() {
 					/>}
 				</div>
 				<div className="right">
-					{selectedArticle && (
+					{/* {selectedArticle && ( */}
 						<SummaryContainer
-							summaries={summaries}
-							userSummary={userSummary}
+							// summaries={summaries}
+							// userSummary={userSummary}
 							selected={selectedArticle}
-							status={isEditing}
+							prevArticleId={prevArticleId}
+							// status={isEditing}
+							feed={feed}
+							// loading={loading}
 							methods={{ 
-								postNewSummary, 
-								deleteSummary, 
-								openEditDialog, 
-								patchSummary, 
+								// postNewSummary, 
+								// deleteSummary, 
+								// openEditDialog, 
+								// patchSummary, 
 								saveArticle, 
-								upvoteSummary 
+								handleTldrClick,
+								// upvoteSummary,
+								// setLoading,
 							}}
 						/>
-					)}
+					{/* )} */}
 				</div>
 			</div>
 

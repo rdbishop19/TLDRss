@@ -1,11 +1,18 @@
 import React from 'react';
 import moment from 'moment';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useHistory } from 'react-router-dom';
 import { isAuthenticated } from '../auth/simpleAuth';
 
-export default function ArticleData({ article, index, methods, isMainView, isLoggedIn }) {
-
+export const ArticleData = ({ 
+	article, 
+	index, 
+	methods, 
+	isMainView, 
+	isLoggedIn 
+}) => {
+	const history = useHistory()
 	const location = useLocation()
+
 	return (
 		<React.Fragment>
 			<a
@@ -30,7 +37,21 @@ export default function ArticleData({ article, index, methods, isMainView, isLog
 				</div>
 				<span>{article.upvote_count} vote(s)</span>
 				<span className="timestamp">{article.pub_date ? moment(article.pub_date).fromNow() : 'some time ago'}</span>
-				{isMainView && <><span className="fake-link" title="view tl;drs" onClick={methods.handleSummaryClick}>tl;dr</span></>}
+				{isMainView &&
+					<>
+						<span 
+							className="fake-link" 
+							title="view tl;drs" 
+							onClick={window.innerWidth > 700 ? 
+								() => methods.handleSummaryClick()
+								:
+								() => history.push(`/feed/articles/${article.id}`)
+							}
+						>
+							tl;dr
+						</span>
+					</>
+				}
 				{(isMainView && isLoggedIn) && (
 					<React.Fragment>
 						{location.pathname === "/feed/saved" ? 
