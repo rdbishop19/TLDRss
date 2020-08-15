@@ -1,4 +1,4 @@
-import React, { useState, useRef, createRef } from 'react'
+import React, { useState, createRef } from 'react'
 import { parse } from 'query-string';
 import { useLocation, useHistory } from 'react-router-dom';
 import './Search.css';

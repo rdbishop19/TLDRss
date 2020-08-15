@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import UserSummary from './UserSummary';
 import NewSummaryForm from './NewSummaryForm';
 import { ArticleData } from './ArticleData';
@@ -66,7 +66,7 @@ export const SummaryContainer = ({
 	};
 	//// ##############################
 	// handle redirect from register/login; otherwise, get first article info
-	const getPrevArticle = () => {
+	const getPrevArticle = useCallback(() => {
 		if (prevArticleId) {
 			getSummaries(prevArticleId);
 		} else if (params.articleId) {
@@ -76,7 +76,7 @@ export const SummaryContainer = ({
 		} else if (feed?.results.length) {
 			getSummaries(feed.results[0].id);
 		}
-	};
+	}, [feed, params.articleId, prevArticleId, selected]);
 	const getSummaries = (articleId) => {
 		// if(selectedArticle){
 		// 	if (window.confirm("Clear current submission?")){
@@ -120,7 +120,7 @@ export const SummaryContainer = ({
 	}
 	useEffect(()=>{
 		getPrevArticle()
-	}, [feed, selected])
+	}, [getPrevArticle, feed, selected])
 	//// #################################
 	useEffect(getArticleInfo, [ selected, feed ]);
 	return (

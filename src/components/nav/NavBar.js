@@ -1,17 +1,20 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { NavLink, useHistory, useLocation } from 'react-router-dom'
 import { logout, isAuthenticated } from '../auth/simpleAuth'
 import './Nav.css'
 import { withRouter } from 'react-router-dom';
-import { parse } from 'query-string';
+// import { parse } from 'query-string';
 import Search from './Search';
 
 function NavBar() {
     
     const history = useHistory()
     const location = useLocation()
-    const { pathname, state: routerState } = location
-    const parsed = parse(location.search);
+    const { 
+        // pathname, 
+        state: routerState 
+    } = location
+    // const parsed = parse(location.search);
 
     const user = isAuthenticated() ? JSON.parse(sessionStorage.getItem("user")) : null
 

@@ -1,7 +1,7 @@
 import React from 'react';
 import moment from 'moment';
 import { Link, useLocation, useHistory } from 'react-router-dom';
-import { isAuthenticated } from '../auth/simpleAuth';
+// import { isAuthenticated } from '../auth/simpleAuth';
 
 export const ArticleData = ({ 
 	article, 

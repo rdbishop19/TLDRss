@@ -4,7 +4,7 @@ import ApiManager from '../../modules/ApiManager';
 import './Home.css';
 import FeedContainer from './FeedContainer';
 // import {SummaryContainer} from './SummaryContainer';
-import { isAuthenticated } from '../auth/simpleAuth';
+// import { isAuthenticated } from '../auth/simpleAuth';
 import { useLocation, useParams } from 'react-router-dom';
 import { parse } from 'query-string';
 import PageButtons from './PageButtons';
@@ -22,7 +22,7 @@ export default function Home() {
 
 	const parsed = parse(location.search);
 
-	const [ searchTerm, setSearchTerm ] = useState(null);
+	const [ , setSearchTerm ] = useState(null);
 	const [ sort, setSort ] = useState(false)
 
 	const [ feed, setFeed ] = useState({
