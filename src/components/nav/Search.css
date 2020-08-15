@@ -46,10 +46,9 @@
 
 @media only screen and (max-width: 700px) {
     .search {
-        float: left;
-        width: 80%;
         margin-bottom: 15px;
         justify-content: start;
+        align-content: flex-start;
     }
     .search-input {
         font-size: 16px;
@@ -60,8 +59,10 @@
         margin: 0;
     }
     .clear-button {
-        float: right;
-        margin-top: -20px;
-        margin-right: -40px;
+        /* float: right; */
+        margin-top: -30px;
+        margin-right: -50px;
+        height: auto;
+        /* display: inline; */
     }
 }

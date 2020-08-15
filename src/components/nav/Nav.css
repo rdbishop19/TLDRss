@@ -128,7 +128,6 @@ a {
 	}
 	.nav-list-item:not(:first-child) {display: none;}
 	#search {
-		/* position: fixed; */
 		display: block;
 		float: left;
 	}
@@ -166,5 +165,8 @@ a {
 	}
 	.username { 
 		width: auto;
+	}
+	.special {
+		border-bottom: 1px solid grey;
 	}
 }

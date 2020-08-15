@@ -64,7 +64,7 @@ function NavBar() {
                             coronavirus
                         </NavLink>
                     </li>
-                    <li id="search" className="nav-list-item">
+                    <li id="search" style={ menuOpen ? { display: 'none' } : undefined } className="nav-list-item">
                         <Search methods={{setMenuOpen}}/>
                     </li>
                     <li id="hamburger" style={ menuOpen ? { display: 'none' } : undefined } className="nav-list-item icon" onClick={toggleMobileDrawer}>
